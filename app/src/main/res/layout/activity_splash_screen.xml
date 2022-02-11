@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".ui.splashscreen.SplashScreenActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_logo"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/absensi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center_horizontal|top"
+        android:layout_marginTop="16dp"
+        android:text="@string/absensi"
+        android:textAlignment="center"
+        android:textAppearance="@style/absensi"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/online"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center_horizontal|top"
+        android:text="@string/online"
+        android:textAppearance="@style/online"
+        app:layout_constraintEnd_toEndOf="@+id/absensi"
+        app:layout_constraintStart_toStartOf="@+id/absensi"
+        app:layout_constraintTop_toBottomOf="@+id/absensi" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center_horizontal|top"
+        android:text="RSUD BREBES"
+        android:textAlignment="center"
+        android:textAppearance="@style/absensi"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/online"
+        app:layout_constraintStart_toStartOf="@+id/online"
+        app:layout_constraintTop_toBottomOf="@+id/online" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
