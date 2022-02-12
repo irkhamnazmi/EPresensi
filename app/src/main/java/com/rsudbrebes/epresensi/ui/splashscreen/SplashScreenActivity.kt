@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.rsudbrebes.epresensi.MainActivity
 import com.rsudbrebes.epresensi.R
 import com.rsudbrebes.epresensi.ui.auth.AuthActivity
 

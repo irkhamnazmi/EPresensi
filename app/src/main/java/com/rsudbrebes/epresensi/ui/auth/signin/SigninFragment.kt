@@ -31,6 +31,12 @@ class SigninFragment : Fragment() {
           startActivity(signup)
       }
 
+      binding.btnSignin.setOnClickListener {
+          val submit = Intent(activity, AuthActivity::class.java)
+          submit.putExtra("page_request",2)
+          startActivity(submit)
+      }
+
     }
 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rsudbrebes.epresensi">
+    package="com.rsudbrebes.epresensi" >
 
     <application
         android:allowBackup="true"
@@ -8,13 +8,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.EPresensi.noActionBar">
+        android:theme="@style/Theme.EPresensi.noActionBar" >
+
         <activity
             android:name=".ui.auth.AuthActivity"
             android:exported="false" />
         <activity
             android:name=".ui.splashscreen.SplashScreenActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,8 +23,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:name=".ui.MainActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="preloaded_fonts"

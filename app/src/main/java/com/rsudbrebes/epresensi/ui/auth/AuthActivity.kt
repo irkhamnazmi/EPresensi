@@ -22,5 +22,15 @@ class AuthActivity : AppCompatActivity() {
             Navigation.findNavController(findViewById(R.id.authHostFragment))
                 .navigate(R.id.action_signup, null,navOption)
         }
+
+        if (pageRequest == 2){
+            val navOption = NavOptions.Builder()
+                .setPopUpTo(R.id.fragmentSignIn, true)
+                .build()
+
+            Navigation.findNavController(findViewById(R.id.authHostFragment))
+                .navigate(R.id.action_sign_success, null,navOption)
+        }
+
     }
 }

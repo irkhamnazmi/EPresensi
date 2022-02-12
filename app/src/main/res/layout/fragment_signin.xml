@@ -42,42 +42,54 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-
-
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="@string/lupa_password"
-            android:textAppearance="@style/lupa_password" />
+            android:layout_marginTop="10dp"
+            android:padding="10dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="2dp"
-            android:layout_toStartOf="@+id/tvRegister"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="Belum punya akun?"
-            android:textAppearance="@style/lupa_password" />
 
-        <TextView
-            android:id="@+id/tvRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Daftar"
-            android:textAppearance="@style/daftar"
-            android:textStyle="italic" />
+            <TextView
+                android:id="@+id/tvKetSatu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/lupa_password"
+                android:textAppearance="@style/lupa_password"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </RelativeLayout>
-    
-    <Button
+            <TextView
+                android:id="@+id/tvKetDua"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/belum_punya_akun"
+                android:layout_marginRight="3dp"
+                android:textAppearance="@style/lupa_password"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvRegister"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Daftar "
+                android:textAppearance="@style/daftar"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
         android:id="@+id/btnSignin"
         android:layout_marginTop="100dp"
         android:layout_width="match_parent"
