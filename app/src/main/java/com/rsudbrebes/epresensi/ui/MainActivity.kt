@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
                 .build()
 
             Navigation.findNavController(findViewById(R.id.homeHostFragment))
-                .navigate(R.id.action_check, null, navOption)
+                .navigate(R.id.action_check_success, null, navOption)
         }
     }
 

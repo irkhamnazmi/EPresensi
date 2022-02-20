@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/fragmentSignIn"
+    app:startDestination="@id/fragmentSignSuccess"
     android:id="@+id/nav_auth">
 
     <fragment android:id="@+id/fragmentSignIn"
@@ -29,6 +29,8 @@
         android:name="com.rsudbrebes.epresensi.ui.auth.signsuccess.SignSuccessFragment"
         tools:layout="@layout/fragment_sign_success">
 
+        <action android:id="@+id/action_signin"
+            app:destination="@+id/fragmentSignIn"/>
 
 
     </fragment>

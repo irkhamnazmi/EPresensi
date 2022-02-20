@@ -6,17 +6,17 @@
     app:startDestination="@id/fragmentCheck">
 
     <fragment android:id="@+id/fragmentCheck"
-        android:name="com.rsudbrebes.epresensi.ui.home.CheckFragment"
+        android:name="com.rsudbrebes.epresensi.ui.home.check.CheckFragment"
         tools:layout="@layout/fragment_check">
 
-        <action android:id="@+id/action_check"
+        <action android:id="@+id/action_check_success"
             app:destination="@id/fragmentCheckSuccess"/>
 
 
     </fragment>
 
     <fragment android:id="@+id/fragmentCheckSuccess"
-        android:name="com.rsudbrebes.epresensi.ui.home.CheckSuccessFragment"
+        android:name="com.rsudbrebes.epresensi.ui.home.checksuccess.CheckSuccessFragment"
         tools:layout="@layout/fragment_check_success">
 
 

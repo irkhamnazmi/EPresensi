@@ -26,7 +26,7 @@ class SignupFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         binding.tvLogin.setOnClickListener {
             val signin = Intent(activity, AuthActivity::class.java)
-            signin.putExtra("page_request",0)
+            signin.putExtra("page_request",2)
             startActivity(signin)
         }
     }
