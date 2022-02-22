@@ -31,7 +31,7 @@ class CheckPresenter (private val view: CheckContract.View) : CheckContract.Pres
     }
 
     override fun submitCheck(absensiRequest: AbsensiRequest) {
-        val disposable = HttpClient.getInstance().getApi()!!.absensi(
+        val disposable = HttpClient.getInstance().getApi()!!.absenPost(
             absensiRequest.nama_pegawai,
             absensiRequest.kode_pegawai,
             absensiRequest.keterangan_absen,
@@ -52,6 +52,25 @@ class CheckPresenter (private val view: CheckContract.View) : CheckContract.Pres
                 },
                 {
                     view.onCheckFailed(it.message.toString())
+                }
+            )
+        mCompositeDisposable!!.add(disposable)
+    }
+
+    override fun checkAbsen(id: String) {
+        val disposable = HttpClient.getInstance().getApi()!!.absenGet(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    if (it.meta?.status.equals("done",true)){
+                        it.data?.let { it1 -> view.onCheckAbsenSuccess(it1) }
+                    } else if(it.meta?.status.equals("ready",true)) {
+                        it.meta?.message?.let { it1 -> view.onCheckAbsenFailed(it1) }
+                    }
+                },
+                {
+//                    view.onCheckAbsenFailed(it.message.toString())
                 }
             )
         mCompositeDisposable!!.add(disposable)

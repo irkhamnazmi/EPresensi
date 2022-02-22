@@ -16,13 +16,13 @@
 
         <path
             android:pathData="M0 0V56.0312H339.244V0"
-            android:fillColor="#00FC28"
+            android:fillColor="#F44336"
             />
 
         <path
             android:pathData="M10.1875 0H329.056C334.683 0 339.244 4.5611 339.244 10.1875V45.8438C339.244 51.4702 334.683 56.0312 329.056 56.0312H10.1875C4.5611 56.0312 0 51.4702 0 45.8438V10.1875C0 4.5611 4.5611 0 10.1875 0Z"
             android:strokeWidth="2.04"
-            android:strokeColor="#00FC28"
+            android:strokeColor="#F44336"
             />
 
     </group>

@@ -27,14 +27,14 @@
             />
 
         <TextView
+            android:id="@+id/tvUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
             android:text="Yusril Izza Alfadli A"
             android:textAlignment="center"
-            android:textColor="@color/black"
             android:textAppearance="@style/userlogin"
-            android:fontFamily="@font/poppins_bold"
-            />
+            android:textColor="@color/black" />
 
 
         <TextView
@@ -53,8 +53,8 @@
             android:layout_height="wrap_content"
             android:text="CHECK IN"
             android:layout_gravity="center"
-            android:background="@drawable/btn_from_checkin_style"
-            android:textAppearance="@style/login"
+            android:background="@drawable/btn_from_uncheck_style"
+            android:textAppearance="@style/selamat_datang"
             android:fontFamily="@font/poppins_semibold"
 
             />

@@ -5,6 +5,14 @@
     app:startDestination="@id/fragmentSignSuccess"
     android:id="@+id/nav_auth">
 
+    <fragment android:id="@+id/fragmentSignSuccess"
+        android:name="com.rsudbrebes.epresensi.ui.auth.signsuccess.SignSuccessFragment"
+        tools:layout="@layout/fragment_sign_success">
+
+        <action android:id="@+id/action_signin"
+            app:destination="@+id/fragmentSignIn"/>
+    </fragment>
+
     <fragment android:id="@+id/fragmentSignIn"
         android:name="com.rsudbrebes.epresensi.ui.auth.signin.SigninFragment"
         tools:layout="@layout/fragment_signin">
@@ -16,6 +24,7 @@
             app:destination="@id/fragmentSignSuccess"/>
 
     </fragment>
+
     <fragment android:id="@+id/fragmentSignUp"
         android:name="com.rsudbrebes.epresensi.ui.auth.signup.SignupFragment"
         tools:layout="@layout/fragment_signup">
@@ -25,15 +34,7 @@
 
     </fragment>
 
-    <fragment android:id="@+id/fragmentSignSuccess"
-        android:name="com.rsudbrebes.epresensi.ui.auth.signsuccess.SignSuccessFragment"
-        tools:layout="@layout/fragment_sign_success">
 
-        <action android:id="@+id/action_signin"
-            app:destination="@+id/fragmentSignIn"/>
-
-
-    </fragment>
 
 
 

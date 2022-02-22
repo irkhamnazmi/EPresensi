@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.Navigation
 import com.google.gson.Gson
 import com.rsudbrebes.epresensi.EPresensi
+import com.rsudbrebes.epresensi.R
 import com.rsudbrebes.epresensi.databinding.FragmentSigninBinding
 import com.rsudbrebes.epresensi.model.response.login.LoginResponse
+import com.rsudbrebes.epresensi.model.response.login.User
 import com.rsudbrebes.epresensi.ui.MainActivity
 import com.rsudbrebes.epresensi.ui.auth.AuthActivity
 
@@ -41,9 +44,7 @@ class SigninFragment : Fragment(), SigninContract.View {
         initDummy()
 
         binding.tvRegister.setOnClickListener {
-            val signup = Intent(activity, AuthActivity::class.java)
-            signup.putExtra("page_request", 1)
-            startActivity(signup)
+            view?.let { Navigation.findNavController(it).navigate(R.id.action_signup) }
         }
 
         binding.btnSignin.setOnClickListener {
@@ -70,9 +71,10 @@ class SigninFragment : Fragment(), SigninContract.View {
         val gson = Gson()
         val json = gson.toJson(loginResponse.user)
         EPresensi.getApp().setUser(json)
-
+        var userResponse = Gson().fromJson(json, User::class.java)
         val submit = Intent(activity, AuthActivity::class.java)
         submit.putExtra("page_request", 0)
+        submit.putExtra("full_name", userResponse.nama_lengkap)
         startActivity(submit)
         activity?.finishAffinity()
 

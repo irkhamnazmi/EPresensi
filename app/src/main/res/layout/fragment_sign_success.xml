@@ -27,14 +27,14 @@
         />
 
     <TextView
+        android:id="@+id/tvUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
         android:text="Yusril Izza Alfadli A"
         android:textAlignment="center"
-        android:textColor="@color/black"
         android:textAppearance="@style/userlogin"
-        android:fontFamily="@font/poppins_bold"
-        />
+        android:textColor="@color/black" />
 
 
     <Button
