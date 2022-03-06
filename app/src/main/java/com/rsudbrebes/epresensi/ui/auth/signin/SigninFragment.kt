@@ -75,6 +75,7 @@ class SigninFragment : Fragment(), SigninContract.View {
         val submit = Intent(activity, AuthActivity::class.java)
         submit.putExtra("page_request", 0)
         submit.putExtra("full_name", userResponse.nama_lengkap)
+        submit.putExtra("username", userResponse.username)
         startActivity(submit)
         activity?.finishAffinity()
 

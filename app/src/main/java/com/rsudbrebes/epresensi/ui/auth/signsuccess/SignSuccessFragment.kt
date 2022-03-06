@@ -37,7 +37,9 @@ class SignSuccessFragment : Fragment() {
         }
         if(EPresensi.getApp().getActive().isNullOrEmpty()){
             val fullName = requireActivity().intent.getStringExtra("full_name")
+            val userName = requireActivity().intent.getStringExtra("username")
             binding.tvUsername.text = fullName.toString()
+            binding.btnNext.text = "Lanjutkan sebagai ${userName.toString()}"
             binding.btnNext.setOnClickListener {
                 EPresensi.getApp().setActive("1")
                 startActivity(Intent(activity, MainActivity::class.java))

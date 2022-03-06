@@ -279,6 +279,7 @@ class CheckFragment : Fragment(), CheckContract.View {
 
     override fun onCheckFailed(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        Log.d(TAG, "onCheckFailed: ${message}")
     }
 
 
