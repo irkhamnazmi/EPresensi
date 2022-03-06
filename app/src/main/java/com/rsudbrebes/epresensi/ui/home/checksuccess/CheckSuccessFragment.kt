@@ -1,5 +1,7 @@
 package com.rsudbrebes.epresensi.ui.home.checksuccess
 
+import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -23,6 +25,8 @@ class CheckSuccessFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        binding.tvCheck.text = arguments?.getString("amount")
+        binding.tvCheck.setTextColor(Color.parseColor("#00FC44"))
     }
 
 

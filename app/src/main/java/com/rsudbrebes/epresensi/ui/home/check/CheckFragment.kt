@@ -13,21 +13,19 @@ import android.os.Bundle
 import android.os.CancellationSignal
 import android.os.Handler
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.gson.Gson
 import com.rsudbrebes.epresensi.EPresensi
 import com.rsudbrebes.epresensi.R
-
 import com.rsudbrebes.epresensi.databinding.FragmentCheckBinding
 import com.rsudbrebes.epresensi.model.request.AbsensiRequest
 import com.rsudbrebes.epresensi.model.response.absensi.AbsensiResponse
@@ -210,12 +208,14 @@ class CheckFragment : Fragment(), CheckContract.View {
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onLongDistance(message: String) {
-        binding.tvResult.text = message
+//        binding.tvResult.text = message
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onShortDistance(maps: String, message: String) {
-        binding.tvResult.text = message
+//        binding.tvResult.text = message
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         location = maps
 
         val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(activity)
@@ -247,7 +247,7 @@ class CheckFragment : Fragment(), CheckContract.View {
     override fun onCheckAbsenFailed(message: String) {
         Log.d(TAG, "onCheckAbsenFailed: ${message}")
         if (message == "Jam Pulang") {
-            binding.tvResult.text = message
+//            binding.tvResult.text = message
             binding.btnCheckIn.setBackgroundResource(R.drawable.btn_from_uncheck_style)
             binding.btnCheckIn.setTextAppearance(R.style.selamat_datang)
             binding.btnCheckOut.setBackgroundResource(R.drawable.btn_from_checkout_style)
@@ -259,7 +259,7 @@ class CheckFragment : Fragment(), CheckContract.View {
                 checkBiometricSupport()
             }
         } else if (message == "Belum Absen") {
-            binding.tvResult.text = message
+//            binding.tvResult.text = message
             binding.btnCheckIn.setBackgroundResource(R.drawable.btn_from_checkin_style)
             binding.btnCheckIn.setTextAppearance(R.style.login)
             binding.btnCheckIn.setOnClickListener {
@@ -273,12 +273,16 @@ class CheckFragment : Fragment(), CheckContract.View {
     }
 
     override fun onCheckSuccess(absensiResponse: AbsensiResponse) {
-        view?.let { Navigation.findNavController(it).navigate(R.id.action_check_success) }
-        Toast.makeText(context, "Anda Berhasi Absen Hari ini", Toast.LENGTH_SHORT).show()
+//        view?.let { Navigation.findNavController(it).navigate(R.id.action_check_success) }
+        val bundle = Bundle()
+        bundle.putString("amount", "Check-In")
+        view?.let { Navigation.findNavController(it).navigate(R.id.action_check_success, bundle) }
+        Toast.makeText(context, "Anda Berhasi Absen Hari ini ${absensiResponse}", Toast.LENGTH_SHORT).show()
     }
 
     override fun onCheckFailed(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        Log.d(TAG, "onCheckFailed: ${message}")
     }
 
 

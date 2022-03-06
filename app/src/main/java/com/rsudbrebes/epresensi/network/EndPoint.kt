@@ -4,6 +4,7 @@ import com.rsudbrebes.epresensi.model.response.Wrapper
 import com.rsudbrebes.epresensi.model.response.absensi.AbsensiResponse
 import com.rsudbrebes.epresensi.model.response.login.LoginResponse
 import io.reactivex.Observable
+import okhttp3.Call
 import retrofit2.http.*
 
 
@@ -15,6 +16,7 @@ interface EndPoint {
 
     @FormUrlEncoded
     @POST("absen")
+    @Headers("X-Requested-With:XMLHttpRequest")
     fun absenPost (@Field("nama_pegawai") nama_pegawai:String,
                  @Field("kode_pegawai") kode_pegawai:String,
                  @Field("keterangan_absen") keterangan_absen:String,
@@ -24,4 +26,7 @@ interface EndPoint {
 
     @GET("absen")
     fun absenGet (@Query("kode_pegawai", encoded = true) kode_pegawai: String) : Observable<Wrapper<AbsensiResponse>>
+
+    @PATCH("alerts/{alert_id}/accept")
+    fun accept_invited_alerts(@Header("X-Api-Token")  api_token: String, @Path("alert_id") alert_id: Int): retrofit2.Call<Unit>
 }

@@ -31,15 +31,12 @@
     <style name="absensi">
 
         <item name="android:textSize">
-            35.03sp
+            25.81sp
         </item>
 
-        <item name="android:letterSpacing">
-            -0.04
-        </item>
 
         <item name="android:textColor">
-            #2D7CF3
+            #5BBFF5
         </item>
 
     </style>
@@ -47,7 +44,7 @@
     <style name="online">
 
         <item name="android:textSize">
-            16.59sp
+            12.22sp
         </item>
 
         <item name="android:letterSpacing">
@@ -153,6 +150,30 @@
             #2D7CF3
         </item>
 
+    </style>
+
+    <style name="powered_by_">
+
+        <item name="android:textSize">
+            12sp
+        </item>
+
+        <item name="android:letterSpacing">
+            0.1
+        </item>
+
+        <item name="android:textColor">
+            #000000
+        </item>
+
+    </style>
+
+    <style name="CustomCheckbox" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:layout_margin">6dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:button">@drawable/cb_selector</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textAppearance">@style/powered_by_</item>
     </style>
 
 

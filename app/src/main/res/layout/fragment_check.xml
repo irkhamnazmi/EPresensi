@@ -1,91 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    tools:context=".ui.home.check.CheckFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.home.check.CheckFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:paddingHorizontal="10dp"
-        >
-
-
-        <TextView
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="User"
-            android:textAlignment="center"
-            android:fontFamily="@font/poppins_medium"
-            android:textAppearance="@style/selamat_datang"
-            />
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:paddingHorizontal="10dp"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints">
 
-        <TextView
-            android:id="@+id/tvUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_bold"
-            android:text="Yusril Izza Alfadli A"
-            android:textAlignment="center"
-            android:textAppearance="@style/userlogin"
-            android:textColor="@color/black" />
+            <ImageView
+                android:layout_width="173dp"
+                android:layout_height="177dp"
+                android:src="@drawable/profile_dummy"
+                tools:src="@drawable/profile_dummy" />
 
-
-        <TextView
-            android:id="@+id/tvResult"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Tunggu sebentar..."
-            android:textAlignment="center"
-            android:fontFamily="@font/poppins"
-            />
-
-        <Button
-            android:id="@+id/btnCheckIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CHECK IN"
-            android:layout_gravity="center"
-            android:background="@drawable/btn_from_uncheck_style"
-            android:textAppearance="@style/selamat_datang"
-            android:fontFamily="@font/poppins_semibold"
-
-            />
-
-        <Button
-            android:id="@+id/btnCheckOut"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CHECK OUT"
-            android:layout_gravity="center"
-            android:background="@drawable/btn_from_uncheck_style"
-            android:textAppearance="@style/selamat_datang"
-            android:fontFamily="@font/poppins_semibold"
-
-            />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Profile"
+                android:textAlignment="center"
+                android:textAppearance="@style/selamat_datang" />
 
 
-        <Button
-            android:id="@+id/tvLogout"
-            android:layout_marginTop="100dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Logout "
-            android:layout_gravity="center"
-            android:drawableRight="@drawable/ic_arrow_right"
-            android:background="@android:color/transparent"
-            android:textAlignment="center"
-            android:fontFamily="@font/poppins_medium"
-            android:textAppearance="@style/login"/>
+            <TextView
+                android:id="@+id/tvUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Yusril Izza Alfadli A"
+                android:textAlignment="center"
+                android:textAppearance="@style/userlogin"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvNip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="NIP : XXXXX"
+                android:textAlignment="center"
+                android:textAppearance="@style/userlogin"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvJabatan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Jabatan : XXXXX"
+                android:textAlignment="center"
+                android:textAppearance="@style/userlogin"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvOption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pilihan Shift:"
+                android:layout_marginTop="32dp"
+                android:textAlignment="center"
+                android:textAppearance="@style/powered_by_"
+                android:fontFamily="@font/poppins"
+                />
 
 
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+
+                android:layout_marginHorizontal="16dp"
+                android:gravity="center">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/CustomCheckbox"
+                    android:text="Shift Pagi"/>
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/CustomCheckbox"
+                    android:text="Shift Siang"/>
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/CustomCheckbox"
+                    android:text="Shift Malam"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnCheckOut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/btn_from_uncheck_style"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="CHECK OUT"
+                android:layout_marginTop="16dp"
+                android:textAppearance="@style/selamat_datang"
+
+                />
+            <Button
+                android:id="@+id/btnCheckIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn_from_uncheck_style"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="CHECK IN"
+                android:textAppearance="@style/selamat_datang" />
+
+
+
+
+            <Button
+                android:id="@+id/tvLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="100dp"
+                android:background="@android:color/transparent"
+                android:drawableRight="@drawable/ic_arrow_right"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Logout "
+                android:textAlignment="center"
+                android:textAppearance="@style/login" />
+
+        </LinearLayout>
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+<!--        <TextView-->
+<!--            android:id="@+id/tvResult"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:text="Tunggu sebentar..."-->
+<!--            android:textAlignment="center"-->
+<!--            android:fontFamily="@font/poppins"-->
+<!--            />-->
+
+
+
+
+

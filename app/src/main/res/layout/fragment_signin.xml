@@ -66,11 +66,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
+                android:layout_marginRight="3dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/belum_punya_akun"
-                android:layout_marginRight="3dp"
-                android:visibility="gone"
                 android:textAppearance="@style/lupa_password"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tvRegister"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -83,9 +83,9 @@
                 android:layout_alignParentEnd="true"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Daftar "
-                android:visibility="gone"
                 android:textAppearance="@style/daftar"
                 android:textStyle="italic"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

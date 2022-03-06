@@ -42,13 +42,15 @@
             android:id="@+id/tvCheck"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Check-In"
+            tools:textColor="#00FC44"
+            tools:text="Check-In"
             android:layout_marginTop="-5dp"
-            android:textColor="#00FC44"
             android:textAlignment="center"
             android:textAppearance="@style/absensi"
             android:fontFamily="@font/poppins_bold"
             />
+
+
 
 
         <Button
