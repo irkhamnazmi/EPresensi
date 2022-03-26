@@ -7,8 +7,8 @@ import com.rsudbrebes.epresensi.model.response.absensi.AbsensiResponse
 
 interface CheckContract {
     interface View: BaseView {
-        fun onLongDistance(message : String)
-        fun onShortDistance(maps: String, message : String)
+//        fun onLongDistance(message : String)
+//        fun onShortDistance(maps: String, message : String)
         fun onCheckSuccess(absensiResponse: AbsensiResponse)
         fun onCheckFailed(message: String)
         fun onCheckAbsenSuccess(absensiResponse: AbsensiResponse)
@@ -17,7 +17,7 @@ interface CheckContract {
     }
 
     interface Presenter : CheckContract, BasePresenter {
-        fun locationDistance(latitude : Double, longitude: Double, latitudeTo: Double, longitudeTo: Double)
+//        fun locationDistance(latitude : Double, longitude: Double, latitudeTo: Double, longitudeTo: Double)
         fun submitCheck(absensiRequest: AbsensiRequest)
         fun checkAbsen(id : String)
 

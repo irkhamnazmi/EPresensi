@@ -45,6 +45,7 @@ class CheckFragment : Fragment(), CheckContract.View {
     private var cancellationSignal: CancellationSignal? = null
 
     var location: String = ""
+    var absenStatus = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -79,7 +80,8 @@ class CheckFragment : Fragment(), CheckContract.View {
 
         val user = EPresensi.getApp().getUser()
         var userResponse = Gson().fromJson(user, User::class.java)
-        binding.tvUsername.text = userResponse.nama_lengkap
+        binding.tvUsername.text = "Nama : ${userResponse.nama_lengkap}"
+        binding.tvJabatan.text = "Jabatan : ${userResponse.jabatan}"
         presenter.checkAbsen(userResponse.kode_pegawai)
     }
 
@@ -129,7 +131,7 @@ class CheckFragment : Fragment(), CheckContract.View {
                 val latitudeTo = -6.874072867659325
                 val longitudeTo = 109.04892526906285
 
-                presenter.locationDistance(latitude, longitude, latitudeTo, longitudeTo)
+//                presenter.locationDistance(latitude, longitude, latitudeTo, longitudeTo)
 
             }
             .addOnFailureListener {
@@ -206,35 +208,35 @@ class CheckFragment : Fragment(), CheckContract.View {
                 }
             }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    override fun onLongDistance(message: String) {
-//        binding.tvResult.text = message
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.P)
-    override fun onShortDistance(maps: String, message: String) {
-//        binding.tvResult.text = message
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-        location = maps
-
-        val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(activity)
-            .setTitle("Presensi dulu")
-            .setSubtitle("Dibutuhkan bukti hadir")
-            .setDescription("Gunakan sidik jari milik Anda")
-            .setNegativeButton(
-                "Batal",
-                context!!.mainExecutor,
-                DialogInterface.OnClickListener { dialog, which ->
-
-                }).build()
-
-        biometricPrompt.authenticate(
-            getCancellationSignal(),
-            context!!.mainExecutor,
-            authenticationCallback
-        )
-    }
+//    @RequiresApi(Build.VERSION_CODES.M)
+//    override fun onLongDistance(message: String) {
+////        binding.tvResult.text = message
+//        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+//    }
+//
+//    @RequiresApi(Build.VERSION_CODES.P)
+//    override fun onShortDistance(maps: String, message: String) {
+////        binding.tvResult.text = message
+//        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+//        location = maps
+//
+//        val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(activity)
+//            .setTitle("Presensi dulu")
+//            .setSubtitle("Dibutuhkan bukti hadir")
+//            .setDescription("Gunakan sidik jari milik Anda")
+//            .setNegativeButton(
+//                "Batal",
+//                context!!.mainExecutor,
+//                DialogInterface.OnClickListener { dialog, which ->
+//
+//                }).build()
+//
+//        biometricPrompt.authenticate(
+//            getCancellationSignal(),
+//            context!!.mainExecutor,
+//            authenticationCallback
+//        )
+//    }
 
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -253,20 +255,54 @@ class CheckFragment : Fragment(), CheckContract.View {
             binding.btnCheckOut.setBackgroundResource(R.drawable.btn_from_checkout_style)
             binding.btnCheckOut.setTextAppearance(R.style.login)
             binding.btnCheckOut.setOnClickListener {
-                fusedLocationClient =
-                    LocationServices.getFusedLocationProviderClient(requireActivity())
-                getCurrentLocation()
+//                fusedLocationClient =
+//                    LocationServices.getFusedLocationProviderClient(requireActivity())
+//                getCurrentLocation()
+                absenStatus = "checkOut"
                 checkBiometricSupport()
+                val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(activity)
+            .setTitle("Presensi dulu")
+            .setSubtitle("Dibutuhkan bukti hadir")
+            .setDescription("Gunakan sidik jari milik Anda")
+            .setNegativeButton(
+                "Batal",
+                context!!.mainExecutor,
+                DialogInterface.OnClickListener { dialog, which ->
+
+                }).build()
+
+        biometricPrompt.authenticate(
+            getCancellationSignal(),
+            context!!.mainExecutor,
+            authenticationCallback
+        )
             }
         } else if (message == "Belum Absen") {
 //            binding.tvResult.text = message
             binding.btnCheckIn.setBackgroundResource(R.drawable.btn_from_checkin_style)
             binding.btnCheckIn.setTextAppearance(R.style.login)
             binding.btnCheckIn.setOnClickListener {
-                fusedLocationClient =
-                    LocationServices.getFusedLocationProviderClient(requireActivity())
-                getCurrentLocation()
+//                fusedLocationClient =
+//                    LocationServices.getFusedLocationProviderClient(requireActivity())
+//                getCurrentLocation()
+                absenStatus = "checkIn"
                 checkBiometricSupport()
+                val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(activity)
+            .setTitle("Presensi dulu")
+            .setSubtitle("Dibutuhkan bukti hadir")
+            .setDescription("Gunakan sidik jari milik Anda")
+            .setNegativeButton(
+                "Batal",
+                context!!.mainExecutor,
+                DialogInterface.OnClickListener { dialog, which ->
+
+                }).build()
+
+            biometricPrompt.authenticate(
+                getCancellationSignal(),
+                context!!.mainExecutor,
+                authenticationCallback
+            )
             }
         }
 
@@ -275,7 +311,7 @@ class CheckFragment : Fragment(), CheckContract.View {
     override fun onCheckSuccess(absensiResponse: AbsensiResponse) {
 //        view?.let { Navigation.findNavController(it).navigate(R.id.action_check_success) }
         val bundle = Bundle()
-        bundle.putString("amount", "Check-In")
+        bundle.putString("status", absenStatus)
         view?.let { Navigation.findNavController(it).navigate(R.id.action_check_success, bundle) }
         Toast.makeText(context, "Anda Berhasi Absen Hari ini ${absensiResponse}", Toast.LENGTH_SHORT).show()
     }

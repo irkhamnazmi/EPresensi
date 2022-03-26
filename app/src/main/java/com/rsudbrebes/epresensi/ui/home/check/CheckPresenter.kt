@@ -17,18 +17,18 @@ class CheckPresenter (private val view: CheckContract.View) : CheckContract.Pres
         this.mCompositeDisposable = CompositeDisposable()
     }
 
-    override fun locationDistance(latitude : Double, longitude: Double, latitudeTo: Double, longitudeTo: Double) {
-        val distance  = getDistance(latitudeTo,longitudeTo, latitude, longitude)
-        val df = DecimalFormat("#.##")
-        df.roundingMode = RoundingMode.CEILING
-        val resultDistance : Double = distance!! * 1000
-//        tvResult.text = "Jarak : ${resultDistance} meter"
-        if(resultDistance <= 100 ){
-            view.onShortDistance("${latitude.toString()},${longitude.toString()}","Sudah dekat ${resultDistance.toString()} meter")
-        } else{
-            view.onLongDistance("Masih jauh ${resultDistance.toString()} meter")
-        }
-    }
+//    override fun locationDistance(latitude : Double, longitude: Double, latitudeTo: Double, longitudeTo: Double) {
+//        val distance  = getDistance(latitudeTo,longitudeTo, latitude, longitude)
+//        val df = DecimalFormat("#.##")
+//        df.roundingMode = RoundingMode.CEILING
+//        val resultDistance : Double = distance!! * 1000
+////        tvResult.text = "Jarak : ${resultDistance} meter"
+//        if(resultDistance <= 100 ){
+//            view.onShortDistance("${latitude.toString()},${longitude.toString()}","Sudah dekat ${resultDistance.toString()} meter")
+//        } else{
+//            view.onLongDistance("Masih jauh ${resultDistance.toString()} meter")
+//        }
+//    }
 
     override fun submitCheck(absensiRequest: AbsensiRequest) {
         val disposable = HttpClient.getInstance().getApi()!!.absenPost(
@@ -86,32 +86,32 @@ class CheckPresenter (private val view: CheckContract.View) : CheckContract.Pres
     }
 
 
-    private fun getDistance(
-        latitudeTujuan: Double,
-        longitudeTujuan: Double,
-        latitudeUser: Double,
-        longitudeUser: Double
-    ): Double? {
-        /* VARIABLE */
-
-        val radian = 0.0174532925
-        val R = 6371
-
-        val latRad1 = latitudeUser * radian
-        val longRad1 = longitudeUser * radian
-        val latRad2 = latitudeTujuan * radian
-        val longRad2 = longitudeTujuan * radian
-
-        val deltaLat = (latRad2 - latRad1)
-        val deltaLong = (longRad2 - longRad1)
-
-
-        /* RUMUS HAVERSINE */
-
-        val a = Math.pow(Math.sin(deltaLat / 2), 2.toDouble()) + Math.pow(Math.sin(deltaLong / 2), 2.toDouble()) * Math.cos(latRad1) * Math.cos(latRad2);
-        val c = 2 * Math.asin(Math.sqrt(a));
-        return R * c
-    }
+//    private fun getDistance(
+//        latitudeTujuan: Double,
+//        longitudeTujuan: Double,
+//        latitudeUser: Double,
+//        longitudeUser: Double
+//    ): Double? {
+//        /* VARIABLE */
+//
+//        val radian = 0.0174532925
+//        val R = 6371
+//
+//        val latRad1 = latitudeUser * radian
+//        val longRad1 = longitudeUser * radian
+//        val latRad2 = latitudeTujuan * radian
+//        val longRad2 = longitudeTujuan * radian
+//
+//        val deltaLat = (latRad2 - latRad1)
+//        val deltaLong = (longRad2 - longRad1)
+//
+//
+//        /* RUMUS HAVERSINE */
+//
+//        val a = Math.pow(Math.sin(deltaLat / 2), 2.toDouble()) + Math.pow(Math.sin(deltaLong / 2), 2.toDouble()) * Math.cos(latRad1) * Math.cos(latRad2);
+//        val c = 2 * Math.asin(Math.sqrt(a));
+//        return R * c
+//    }
 
 
 }

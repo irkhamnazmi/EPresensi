@@ -25,7 +25,12 @@ class CheckSuccessFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        binding.tvCheck.text = arguments?.getString("amount")
+        val checkStatus = arguments?.getString("status")
+        if(checkStatus.equals("checkIn")){
+             binding.tvCheck.text = "Check-In"
+        } else{
+            binding.tvCheck.text = "Check-Out"
+        }
         binding.tvCheck.setTextColor(Color.parseColor("#00FC44"))
     }
 

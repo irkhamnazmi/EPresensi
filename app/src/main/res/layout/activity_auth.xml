@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.auth.AuthActivity"
+    android:background="@drawable/background_color"
+    android:padding="16dp"
     android:orientation="vertical">
 
     <include layout="@layout/layout_header_auth"
