@@ -4,10 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-<<<<<<< HEAD
-=======
-    android:background="@color/white"
->>>>>>> origin/master
     android:padding="16dp">
 
 
