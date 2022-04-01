@@ -3,8 +3,8 @@ package com.rsudbrebes.epresensi.network
 import com.rsudbrebes.epresensi.model.response.Wrapper
 import com.rsudbrebes.epresensi.model.response.absensi.AbsensiResponse
 import com.rsudbrebes.epresensi.model.response.login.LoginResponse
+import com.rsudbrebes.epresensi.model.response.register.RegisterResponse
 import io.reactivex.Observable
-import okhttp3.Call
 import retrofit2.http.*
 
 
@@ -26,6 +26,10 @@ interface EndPoint {
 
     @GET("absen")
     fun absenGet (@Query("kode_pegawai", encoded = true) kode_pegawai: String) : Observable<Wrapper<AbsensiResponse>>
+
+    @GET("register")
+    fun userGet (@Query("email", encoded = true) email: String) : Observable<Wrapper<RegisterResponse>>
+
 
     @PATCH("alerts/{alert_id}/accept")
     fun accept_invited_alerts(@Header("X-Api-Token")  api_token: String, @Path("alert_id") alert_id: Int): retrofit2.Call<Unit>

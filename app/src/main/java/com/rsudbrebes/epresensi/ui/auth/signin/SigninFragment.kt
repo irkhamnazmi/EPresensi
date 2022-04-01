@@ -13,8 +13,7 @@ import com.rsudbrebes.epresensi.EPresensi
 import com.rsudbrebes.epresensi.R
 import com.rsudbrebes.epresensi.databinding.FragmentSigninBinding
 import com.rsudbrebes.epresensi.model.response.login.LoginResponse
-import com.rsudbrebes.epresensi.model.response.login.User
-import com.rsudbrebes.epresensi.ui.MainActivity
+import com.rsudbrebes.epresensi.model.response.user.User
 import com.rsudbrebes.epresensi.ui.auth.AuthActivity
 
 class SigninFragment : Fragment(), SigninContract.View {
@@ -69,13 +68,13 @@ class SigninFragment : Fragment(), SigninContract.View {
     override fun onLoginSuccess(loginResponse: LoginResponse) {
 
         val gson = Gson()
-        val json = gson.toJson(loginResponse.user)
+        val json = gson.toJson(loginResponse.login)
         EPresensi.getApp().setUser(json)
-        var userResponse = Gson().fromJson(json, User::class.java)
+        var loginResponse = Gson().fromJson(json, User::class.java)
         val submit = Intent(activity, AuthActivity::class.java)
         submit.putExtra("page_request", 0)
-        submit.putExtra("full_name", userResponse.nama_lengkap)
-        submit.putExtra("username", userResponse.username)
+        submit.putExtra("full_name", loginResponse.nama_lengkap)
+        submit.putExtra("username", loginResponse.username)
         startActivity(submit)
         activity?.finishAffinity()
 

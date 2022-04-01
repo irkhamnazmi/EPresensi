@@ -7,13 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
-import com.google.gson.Gson
 import com.rsudbrebes.epresensi.EPresensi
 import com.rsudbrebes.epresensi.R
 import com.rsudbrebes.epresensi.databinding.FragmentSignSuccessBinding
-import com.rsudbrebes.epresensi.model.response.login.User
 import com.rsudbrebes.epresensi.ui.MainActivity
-import com.rsudbrebes.epresensi.ui.auth.AuthActivity
 
 
 class SignSuccessFragment : Fragment() {

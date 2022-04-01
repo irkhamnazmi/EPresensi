@@ -2,6 +2,7 @@ package com.rsudbrebes.epresensi.model.response.login
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.rsudbrebes.epresensi.model.response.user.User
 
 data class LoginResponse(
     @Expose
@@ -11,6 +12,6 @@ data class LoginResponse(
     @SerializedName("token_type")
     val token_type: String,
     @Expose
-    @SerializedName("user")
-    val user: User
+    @SerializedName("login")
+    val login: User
 )

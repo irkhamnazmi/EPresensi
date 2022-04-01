@@ -22,14 +22,13 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import com.google.gson.Gson
 import com.rsudbrebes.epresensi.EPresensi
 import com.rsudbrebes.epresensi.R
 import com.rsudbrebes.epresensi.databinding.FragmentCheckBinding
 import com.rsudbrebes.epresensi.model.request.AbsensiRequest
 import com.rsudbrebes.epresensi.model.response.absensi.AbsensiResponse
-import com.rsudbrebes.epresensi.model.response.login.User
+import com.rsudbrebes.epresensi.model.response.user.User
 import com.rsudbrebes.epresensi.ui.auth.AuthActivity
 
 

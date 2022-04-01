@@ -15,15 +15,14 @@
     android:paddingHorizontal="10dp"
    >
 
-
     <EditText
-        android:id="@+id/edtEmail"
+        android:id="@+id/edtFullname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/edt_form_style"
         android:fontFamily="@font/poppins"
-        android:hint="Masukkan Email"
+        android:hint="Masukkan Nama Lengkap"
         android:textAlignment="center"
         android:textAppearance="@style/username"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,6 +41,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+
     <EditText
         android:id="@+id/edtPassword"
         android:layout_width="match_parent"
@@ -56,17 +57,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+<!--    <EditText-->
+<!--        android:id="@+id/edtPasswordRepeat"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:fontFamily="@font/poppins"-->
+<!--        android:hint="Masukkan ulang password"-->
+<!--        android:inputType="textPassword"-->
+<!--        android:textAlignment="center"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:textAppearance="@style/username"-->
+<!--        android:background="@drawable/edt_form_style"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
     <EditText
-        android:id="@+id/edtPasswordRepeat"
+        android:id="@+id/edtEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins"
-        android:hint="Masukkan ulang password"
-        android:inputType="textPassword"
-        android:textAlignment="center"
         android:layout_marginTop="10dp"
-        android:textAppearance="@style/username"
         android:background="@drawable/edt_form_style"
+        android:fontFamily="@font/poppins"
+        android:hint="Masukkan Email"
+        android:textAlignment="center"
+        android:textAppearance="@style/username"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
