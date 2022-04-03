@@ -61,7 +61,7 @@ class HttpClient {
 
         val okHttpClient = builder.build()
         client = Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL+"absensi/")
+            .baseUrl(BuildConfig.BASE_URL+"api/absensi/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(Helpers.getDefaultGson()))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

@@ -21,8 +21,10 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.bumptech.glide.Glide
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.gson.Gson
+import com.rsudbrebes.epresensi.BuildConfig.BASE_URL
 import com.rsudbrebes.epresensi.EPresensi
 import com.rsudbrebes.epresensi.R
 import com.rsudbrebes.epresensi.databinding.FragmentCheckBinding
@@ -79,6 +81,7 @@ class CheckFragment : Fragment(), CheckContract.View {
 
         val user = EPresensi.getApp().getUser()
         var userResponse = Gson().fromJson(user, User::class.java)
+        Glide.with(this).load(BASE_URL+"storage/profile/${userResponse.image}").into(binding.imageProfil);
         binding.tvUsername.text = "Nama : ${userResponse.nama_lengkap}"
         binding.tvNip.text = "NIP : ${userResponse.nip}"
         binding.tvJabatan.text = "Jabatan : ${userResponse.jabatan}"
