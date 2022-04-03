@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "908322508072",
+    "project_id": "epresensi-89d8b",
+    "storage_bucket": "epresensi-89d8b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:908322508072:android:134d37acf602b1de96541d",
+        "android_client_info": {
+          "package_name": "com.rsudbrebes.epresensi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "908322508072-0508ibqgkvs5v7cu2dbaclf4sklthdlh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdPDtbc9uw7ZEWOh3pz9Cn3_Qoxwfel6M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "908322508072-0508ibqgkvs5v7cu2dbaclf4sklthdlh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:908322508072:android:b63c9c518dd0d8a896541d",
+        "android_client_info": {
+          "package_name": "com.rsudbrebes.epresensi.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "908322508072-0508ibqgkvs5v7cu2dbaclf4sklthdlh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdPDtbc9uw7ZEWOh3pz9Cn3_Qoxwfel6M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "908322508072-0508ibqgkvs5v7cu2dbaclf4sklthdlh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
