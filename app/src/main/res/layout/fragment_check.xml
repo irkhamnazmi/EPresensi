@@ -21,6 +21,7 @@
             >
 
             <ImageView
+                android:id="@+id/image_profil"
                 android:layout_width="173dp"
                 android:layout_height="177dp"
                 android:src="@drawable/profile_dummy"

@@ -2,12 +2,14 @@ package com.rsudbrebes.epresensi.ui.auth.signin
 
 import android.content.Intent
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.navigation.Navigation
 import com.google.gson.Gson
 import com.rsudbrebes.epresensi.EPresensi
@@ -32,12 +34,13 @@ class SigninFragment : Fragment(), SigninContract.View {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         presenter = SigninPresenter(this)
         val tvFooter = binding.includedFooter.tvFooter
         tvFooter.text = activity?.getString(R.string.version)
-        tvFooter.setTextAppearance(getActivity(), R.style.versi_0_1_2)
+        tvFooter.setTextAppearance(R.style.versi_0_1_2)
 
         if (!EPresensi.getApp().getUser().isNullOrEmpty()) {
             val submit = Intent(activity, AuthActivity::class.java)

@@ -33,6 +33,7 @@
             android:layout_marginTop="16dp"
             android:text="Berhasil"
             android:textAlignment="center"
+            android:textColor="#2D7CF3"
             android:textAppearance="@style/absensi"
             android:fontFamily="@font/poppins_bold"
             />
@@ -41,7 +42,7 @@
             android:id="@+id/tvCheck"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:textColor="#00FC44"
+            android:textColor="#2D7CF3"
             tools:text="Check-In"
             android:layout_marginTop="-5dp"
             android:textAlignment="center"
@@ -52,18 +53,7 @@
 
 
 
-        <Button
-            android:id="@+id/tvLogout"
-            android:layout_marginTop="100dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Logout "
-            android:layout_gravity="center"
-            android:drawableRight="@drawable/ic_arrow_right"
-            android:background="@android:color/transparent"
-            android:textAlignment="center"
-            android:fontFamily="@font/poppins_medium"
-            android:textAppearance="@style/login"/>
+
 
 
     </LinearLayout>

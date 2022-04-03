@@ -1,13 +1,11 @@
 package com.rsudbrebes.epresensi.ui.home.checksuccess
 
-import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.rsudbrebes.epresensi.R
+import androidx.fragment.app.Fragment
 import com.rsudbrebes.epresensi.databinding.FragmentCheckSuccessBinding
 
 
@@ -31,7 +29,11 @@ class CheckSuccessFragment : Fragment() {
         } else{
             binding.tvCheck.text = "Check-Out"
         }
-        binding.tvCheck.setTextColor(Color.parseColor("#00FC44"))
+
+        Handler().postDelayed({
+            getActivity()?.recreate();
+        },3000)
+
     }
 
 

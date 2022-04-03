@@ -73,6 +73,9 @@ class SignSuccessFragment : Fragment(), SignSuccessContract.View {
             binding.btnNext.text = "Lanjutkan sebagai ${registerResponse.register.username} "
             binding.btnNext.setOnClickListener {
                 EPresensi.getApp().setActive("1")
+                val gson = Gson()
+                val json = gson.toJson(registerResponse.register)
+                EPresensi.getApp().setUser(json)
                 startActivity(Intent(activity, MainActivity::class.java))
                 activity?.finish()
             }
