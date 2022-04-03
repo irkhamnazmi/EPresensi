@@ -80,6 +80,7 @@ class CheckFragment : Fragment(), CheckContract.View {
         val user = EPresensi.getApp().getUser()
         var userResponse = Gson().fromJson(user, User::class.java)
         binding.tvUsername.text = "Nama : ${userResponse.nama_lengkap}"
+        binding.tvNip.text = "NIP : ${userResponse.nip}"
         binding.tvJabatan.text = "Jabatan : ${userResponse.jabatan}"
         presenter.checkAbsen(userResponse.kode_pegawai)
     }

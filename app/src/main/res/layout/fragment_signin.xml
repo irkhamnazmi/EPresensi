@@ -1,107 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     tools:context=".ui.auth.signin.SigninFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-    <EditText
-        android:id="@+id/edtUsername"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_signin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/edt_form_style"
-        android:fontFamily="@font/poppins"
-        android:hint="Masukkan Username"
-        android:textAlignment="center"
-        android:textAppearance="@style/username"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        app:cardCornerRadius="25dp"
+       >
 
-    <EditText
-        android:id="@+id/edtPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins"
-        android:hint="Masukkan Password"
-        android:textAlignment="center"
-        android:layout_marginTop="10dp"
-        android:inputType="textPassword"
-        android:textAppearance="@style/username"
-        android:background="@drawable/edt_form_style"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:padding="10dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="42dp"
+          >
 
-
-            <TextView
-                android:id="@+id/tvKetSatu"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/edtUsername"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="@string/lupa_password"
-                android:textAppearance="@style/lupa_password"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edt_form_style"
+                android:fontFamily="@font/poppins"
+                android:hint="Masukkan Username"
+                android:textAlignment="center"
+                android:textAppearance="@style/username"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tvKetDua"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/edtPassword"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginRight="3dp"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="@string/belum_punya_akun"
-                android:textAppearance="@style/lupa_password"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tvRegister"
+                android:fontFamily="@font/poppins"
+                android:hint="Masukkan Password"
+                android:textAlignment="center"
+                android:layout_marginTop="10dp"
+                android:inputType="textPassword"
+                android:textAppearance="@style/username"
+                android:background="@drawable/edt_form_style"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tvRegister"
-                android:layout_width="wrap_content"
+
+
+            <Button
+                android:id="@+id/btnSignin"
+                android:layout_marginTop="37dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Daftar "
-                android:textAppearance="@style/daftar"
-                android:textStyle="italic"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="Login"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:fontFamily="@font/poppins_bold"
+                android:textAppearance="@style/login"
+                android:background="@drawable/btn_form_style"
+                />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
-        android:id="@+id/btnSignin"
-        android:layout_marginTop="100dp"
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:textAllCaps="true"
-        android:fontFamily="@font/poppins_bold"
-        android:textAppearance="@style/login"
-        android:background="@drawable/btn_form_style"
-        />
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/cv_signin"
+        android:gravity="center"
+        android:padding="10dp">
 
 
-</LinearLayout>
-</androidx.core.widget.NestedScrollView>
+        <TextView
+            android:id="@+id/tvKetDua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="2.5dp"
+            android:layout_marginRight="1dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/belum_punya_akun"
+            android:textAppearance="@style/lupa_password"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tvRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/tvKetDua"
+            android:layout_alignParentTop="true"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Register "
+            android:textAppearance="@style/daftar"
+            android:textStyle="italic"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/included_footer"
+        layout="@layout/layout_footer_copyright"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

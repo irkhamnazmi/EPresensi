@@ -12,6 +12,6 @@ data class RegisterResponse(
     @SerializedName("token_type")
     val token_type: String,
     @Expose
-    @SerializedName("user")
+    @SerializedName("register")
     val register: User
 )

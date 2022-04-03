@@ -5,12 +5,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.rsudbrebes.epresensi.R
+import com.rsudbrebes.epresensi.databinding.ActivitySplashScreenBinding
+import com.rsudbrebes.epresensi.databinding.FragmentSignupBinding
 import com.rsudbrebes.epresensi.ui.auth.AuthActivity
 
 class SplashScreenActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySplashScreenBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
+        binding = ActivitySplashScreenBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.includedFooter.tvFooter.text = "Powered by:\n Team IT RSUD BREBES"
+
 
         Handler().postDelayed({
             startActivity(Intent(this, AuthActivity::class.java))

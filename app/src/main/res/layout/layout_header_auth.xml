@@ -22,6 +22,7 @@
             android:fontFamily="@font/poppins_bold"
             android:gravity="center_horizontal|top"
             android:text="@string/absensi"
+            android:textColor="#5BBFF5"
             android:textAppearance="@style/absensi"
             />
 

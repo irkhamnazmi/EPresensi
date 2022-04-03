@@ -6,8 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.google.gson.Gson
+import com.rsudbrebes.epresensi.EPresensi
+import com.rsudbrebes.epresensi.R
 import com.rsudbrebes.epresensi.databinding.FragmentSignupBinding
+import com.rsudbrebes.epresensi.model.request.AbsensiRequest
+import com.rsudbrebes.epresensi.model.request.RegisterRequest
 import com.rsudbrebes.epresensi.model.response.login.LoginResponse
+import com.rsudbrebes.epresensi.model.response.register.RegisterResponse
+import com.rsudbrebes.epresensi.model.response.user.User
+import com.rsudbrebes.epresensi.ui.MainActivity
 import com.rsudbrebes.epresensi.ui.auth.AuthActivity
 import com.rsudbrebes.epresensi.ui.auth.signin.SigninPresenter
 import java.util.regex.Pattern
@@ -39,9 +48,12 @@ class SignupFragment : Fragment(), SignupContract.View {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         presenter = SignupPresenter(this)
+        val tvFooter = binding.includedFooter.tvFooter
+        tvFooter.text = activity?.getString(R.string.version)
+        tvFooter.setTextAppearance(getActivity(), R.style.versi_0_1_2)
         binding.tvLogin.setOnClickListener {
             val signin = Intent(activity, AuthActivity::class.java)
-            signin.putExtra("page_request",2)
+            signin.putExtra("page_request", 2)
             startActivity(signin)
         }
 
@@ -54,34 +66,46 @@ class SignupFragment : Fragment(), SignupContract.View {
             if (fullName.text.toString().isNullOrEmpty()) {
                 fullName.error = "Silahkan masukkan Nama Lengkap Anda"
                 fullName.requestFocus()
-            }else if (username.text.toString().isNullOrEmpty()) {
+            } else if (username.text.toString().isNullOrEmpty()) {
                 username.error = "Silahkan masukkan Username Anda"
                 username.requestFocus()
-            }else if (password.text.toString().isNullOrEmpty()) {
+            } else if (password.text.toString().isNullOrEmpty()) {
                 password.error = "Silahkan masukkan password Anda"
                 password.requestFocus()
-            }else if (email.text.toString().isNullOrEmpty()) {
+            } else if (email.text.toString().isNullOrEmpty()) {
                 email.error = "Silahkan masukkan Email Anda"
                 email.requestFocus()
-            }else if (!isEmailValid(email.text.toString())) {
+            } else if (!isEmailValid(email.text.toString())) {
                 email.error = "Email Anda Salah"
                 email.requestFocus()
-            } else{
-                presenter.getRegister(email.toString())
+            } else {
+                var data = RegisterRequest(
+                    fullName.text.toString(),
+                    username.text.toString(),
+                    password.text.toString(),
+                    email.text.toString()
+                )
+                presenter.submitSignUp(data)
             }
         }
 
     }
-   private fun isEmailValid(email: String): Boolean {
+
+    private fun isEmailValid(email: String): Boolean {
         return emailPattern.toRegex().matches(email);
     }
 
-    override fun onSignUpSuccess(loginResponse: LoginResponse) {
 
+    override fun onSignUpSuccess(registerResponse: RegisterResponse) {
+        val gson = Gson()
+        val json = gson.toJson(registerResponse.register)
+        EPresensi.getApp().setUser(json)
+        startActivity(Intent(activity, AuthActivity::class.java))
+        activity?.finish()
     }
 
     override fun onSignUpFailed(message: String) {
-
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun showLoading() {
