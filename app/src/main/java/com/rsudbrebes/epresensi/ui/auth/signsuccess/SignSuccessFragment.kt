@@ -63,7 +63,7 @@ class SignSuccessFragment : Fragment(), SignSuccessContract.View {
             binding.btnNext.text = "Lengkapi Profil Anda "
             binding.btnNext.setOnClickListener {
                 val url =
-                    "https://sub.e-absenrsudbrebesonline.my.id/public?${registerResponse.register.email}"
+                    "https://sub.e-absenrsudbrebesonline.my.id/public/login/${registerResponse.register.email}"
                 val i = Intent(Intent.ACTION_VIEW)
                 i.data = Uri.parse(url)
                 startActivity(i)
