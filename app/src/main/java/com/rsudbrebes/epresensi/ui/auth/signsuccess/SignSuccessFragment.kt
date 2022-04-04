@@ -17,6 +17,7 @@ import com.rsudbrebes.epresensi.databinding.FragmentSignSuccessBinding
 import com.rsudbrebes.epresensi.model.response.register.RegisterResponse
 import com.rsudbrebes.epresensi.model.response.user.User
 import com.rsudbrebes.epresensi.ui.MainActivity
+import com.rsudbrebes.epresensi.ui.auth.AuthActivity
 
 
 class SignSuccessFragment : Fragment(), SignSuccessContract.View {
@@ -64,10 +65,17 @@ class SignSuccessFragment : Fragment(), SignSuccessContract.View {
         if (registerResponse.register.kode_pegawai.isEmpty()) {
             binding.btnNext.text = "Lengkapi Profil Anda "
             binding.btnNext.setOnClickListener {
-                val url = BASE_URL + "register/${registerResponse.register.email}"
-                val i = Intent(Intent.ACTION_VIEW)
-                i.data = Uri.parse(url)
+//                val url = BASE_URL + "register/${registerResponse.register.email}"
+//                val i = Intent(Intent.ACTION_VIEW)
+//                i.data = Uri.parse(url)
+//                startActivity(i)
+
+                val i = Intent(activity, AuthActivity::class.java)
+                i.putExtra("url",BASE_URL + "register/${registerResponse.register.email}")
+//                i.data = Uri.parse(url)
+                i.putExtra("page_request","webview")
                 startActivity(i)
+
             }
 
         } else {

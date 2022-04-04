@@ -11,15 +11,15 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
-        val pageRequest = intent.getIntExtra("page_request",0)
-//        if (pageRequest == 1){
-//            val navOption = NavOptions.Builder()
-//                .setPopUpTo(R.id.fragmentSignIn, true)
-//                .build()
-//
-//            Navigation.findNavController(findViewById(R.id.authHostFragment))
-//                .navigate(R.id.action_signup, null,navOption)
-//        }
+        val pageRequest = intent.getStringExtra("page_request")
+        if (pageRequest.equals("webview")){
+            val navOption = NavOptions.Builder()
+                .setPopUpTo(R.id.fragmentSignSuccess, true)
+                .build()
+
+            Navigation.findNavController(findViewById(R.id.authHostFragment))
+                .navigate(R.id.action_webview, null,navOption)
+        }
 //
 //
 //        if (pageRequest == 2){

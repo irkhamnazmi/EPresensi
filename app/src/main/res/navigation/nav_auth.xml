@@ -11,6 +11,11 @@
 
         <action android:id="@+id/action_signin"
             app:destination="@+id/fragmentSignIn"/>
+
+        <action android:id="@+id/action_webview"
+            app:destination="@+id/fragmentWebview"/>
+
+
     </fragment>
 
     <fragment android:id="@+id/fragmentSignIn"
@@ -33,9 +38,11 @@
             app:destination="@id/fragmentSignIn"/>
 
     </fragment>
-
-
-
+    <fragment
+        android:id="@+id/fragmentWebview"
+        android:name="com.rsudbrebes.epresensi.ui.auth.webview.WebviewFragment"
+        android:label="fragment_webview"
+        tools:layout="@layout/fragment_webview" />
 
 
 </navigation>
