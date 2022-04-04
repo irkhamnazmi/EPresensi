@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.gson.Gson
+import com.rsudbrebes.epresensi.BuildConfig.BASE_URL
 import com.rsudbrebes.epresensi.EPresensi
 import com.rsudbrebes.epresensi.R
 import com.rsudbrebes.epresensi.databinding.FragmentSignSuccessBinding
@@ -35,7 +36,8 @@ class SignSuccessFragment : Fragment(), SignSuccessContract.View {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         presenter = SignSuccessPresenter(this)
-        binding.includedFooter.tvFooter.text = "Jl. Jendral Sudirman No.181, Brebes, Jawa Tengah 52272"
+        binding.includedFooter.tvFooter.text =
+            "Jl. Jendral Sudirman No.181, Brebes, Jawa Tengah 52272"
 
         if (EPresensi.getApp().getUser().isNullOrEmpty()) {
             view?.let { Navigation.findNavController(it).navigate(R.id.action_signin) }
@@ -62,8 +64,7 @@ class SignSuccessFragment : Fragment(), SignSuccessContract.View {
         if (registerResponse.register.kode_pegawai.isEmpty()) {
             binding.btnNext.text = "Lengkapi Profil Anda "
             binding.btnNext.setOnClickListener {
-                val url =
-                    "https://sub.e-absenrsudbrebesonline.my.id/public/login/${registerResponse.register.email}"
+                val url = BASE_URL + "register/${registerResponse.register.email}"
                 val i = Intent(Intent.ACTION_VIEW)
                 i.data = Uri.parse(url)
                 startActivity(i)
