@@ -2,16 +2,14 @@
 <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
+    android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".ui.auth.signup.SignupFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/included_footer"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -20,18 +18,18 @@
 
         >
 
-        <EditText
-            android:id="@+id/edtFullname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/edt_form_style"
-            android:fontFamily="@font/poppins"
-            android:hint="Masukkan Nama Lengkap"
-            android:textAlignment="center"
-            android:textAppearance="@style/username"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <EditText-->
+<!--            android:id="@+id/edtFullname"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:background="@drawable/edt_form_style"-->
+<!--            android:fontFamily="@font/poppins"-->
+<!--            android:hint="Masukkan Nama Lengkap"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textAppearance="@style/username"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
         <EditText
             android:id="@+id/edtUsername"
@@ -99,9 +97,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="3dp"
-                android:layout_marginTop="2.5dp"
                 android:layout_alignParentTop="true"
+                android:layout_marginTop="2.5dp"
+                android:layout_marginRight="3dp"
                 android:layout_toStartOf="@+id/tvLogin"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Sudah punya akun?"
@@ -131,12 +129,5 @@
 
 
     </LinearLayout>
-    <include
-        android:id="@+id/included_footer"
-        layout="@layout/layout_footer_copyright"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"/>
+
 </RelativeLayout>

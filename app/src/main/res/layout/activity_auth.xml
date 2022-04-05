@@ -5,41 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_color"
-    android:padding="16dp"
     tools:context=".ui.auth.AuthActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:fillViewport="true"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <RelativeLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:orientation="vertical">
 
             <include
                 android:id="@+id/included_header"
                 layout="@layout/layout_header_auth"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_height="wrap_content" />
+
 
             <LinearLayout
                 android:id="@+id/ln_auth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/included_header"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
+                android:layout_marginTop="28dp"
                 android:orientation="vertical">
 
 
@@ -51,11 +41,18 @@
                     app:defaultNavHost="true"
                     app:navGraph="@navigation/nav_auth" />
 
-
             </LinearLayout>
 
 
-        </RelativeLayout>
+            <include
+                android:id="@+id/included_footer"
+                layout="@layout/layout_footer_copyright"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="179dp" />
+
+
+        </LinearLayout>
 
 
     </androidx.core.widget.NestedScrollView>

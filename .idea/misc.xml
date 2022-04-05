@@ -15,8 +15,8 @@
         <entry key="app/src/main/res/drawable/edt_form_style.xml" value="0.37395833333333334" />
         <entry key="app/src/main/res/drawable/ic_arrow_right.xml" value="0.215625" />
         <entry key="app/src/main/res/drawable/ic_logo.xml" value="0.37395833333333334" />
-        <entry key="app/src/main/res/layout/activity_auth.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_auth.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.4010416666666667" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.25487256371814093" />
         <entry key="app/src/main/res/layout/activity_splash_secreen.xml" value="0.296195652173913" />
         <entry key="app/src/main/res/layout/fragment_check.xml" value="0.18" />
@@ -24,11 +24,12 @@
         <entry key="app/src/main/res/layout/fragment_check_success.xml" value="0.18933333333333333" />
         <entry key="app/src/main/res/layout/fragment_sign_success.xml" value="0.21" />
         <entry key="app/src/main/res/layout/fragment_signin.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.46220302375809935" />
-        <entry key="app/src/main/res/layout/fragment_webview.xml" value="0.1037037037037037" />
+        <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/fragment_webview.xml" value="0.19427083333333334" />
         <entry key="app/src/main/res/layout/layout_footer_copyright.xml" value="0.15" />
-        <entry key="app/src/main/res/layout/layout_header_auth.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/layout_header_auth.xml" value="0.18" />
         <entry key="app/src/main/res/layout/layout_toolbar.xml" value="0.3578125" />
+        <entry key="app/src/main/res/layout/showdialog_webview.xml" value="0.12269736842105264" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.14814814814814814" />
       </map>
     </option>

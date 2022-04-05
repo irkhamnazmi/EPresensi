@@ -1,25 +1,21 @@
 package com.rsudbrebes.epresensi.ui.auth
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import com.rsudbrebes.epresensi.R
+import com.rsudbrebes.epresensi.databinding.ActivityAuthBinding
 
 class AuthActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityAuthBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_auth)
-
+        binding = ActivityAuthBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         val pageRequest = intent.getStringExtra("page_request")
-        if (pageRequest.equals("webview")){
-            val navOption = NavOptions.Builder()
-                .setPopUpTo(R.id.fragmentSignSuccess, true)
-                .build()
 
-            Navigation.findNavController(findViewById(R.id.authHostFragment))
-                .navigate(R.id.action_webview, null,navOption)
-        }
 //
 //
 //        if (pageRequest == 2){
@@ -33,5 +29,9 @@ class AuthActivity : AppCompatActivity() {
 
 
 
+    }
+
+    fun dispatchInformations(mesg: String?) {
+        binding.includedFooter.tvFooter.text = mesg
     }
 }

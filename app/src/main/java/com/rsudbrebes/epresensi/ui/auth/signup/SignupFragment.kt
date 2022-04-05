@@ -48,9 +48,7 @@ class SignupFragment : Fragment(), SignupContract.View {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         presenter = SignupPresenter(this)
-        val tvFooter = binding.includedFooter.tvFooter
-        tvFooter.text = activity?.getString(R.string.version)
-        tvFooter.setTextAppearance(getActivity(), R.style.versi_0_1_2)
+        (activity as AuthActivity)?.dispatchInformations(activity?.getString(R.string.version))
         binding.tvLogin.setOnClickListener {
             val signin = Intent(activity, AuthActivity::class.java)
             signin.putExtra("page_request", 2)
@@ -58,15 +56,12 @@ class SignupFragment : Fragment(), SignupContract.View {
         }
 
         binding.btnSignup.setOnClickListener {
-            var fullName = binding.edtFullname
+//            var fullName = binding.edtFullname
             var username = binding.edtUsername
             var password = binding.edtPassword
             var email = binding.edtEmail
 
-            if (fullName.text.toString().isNullOrEmpty()) {
-                fullName.error = "Silahkan masukkan Nama Lengkap Anda"
-                fullName.requestFocus()
-            } else if (username.text.toString().isNullOrEmpty()) {
+            if (username.text.toString().isNullOrEmpty()) {
                 username.error = "Silahkan masukkan Username Anda"
                 username.requestFocus()
             } else if (password.text.toString().isNullOrEmpty()) {
@@ -80,7 +75,7 @@ class SignupFragment : Fragment(), SignupContract.View {
                 email.requestFocus()
             } else {
                 var data = RegisterRequest(
-                    fullName.text.toString(),
+                    "",
                     username.text.toString(),
                     password.text.toString(),
                     email.text.toString()

@@ -1,23 +1,20 @@
 package com.rsudbrebes.epresensi.ui.auth.signin
 
 import android.content.Intent
-import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.gson.Gson
 import com.rsudbrebes.epresensi.EPresensi
 import com.rsudbrebes.epresensi.R
 import com.rsudbrebes.epresensi.databinding.FragmentSigninBinding
 import com.rsudbrebes.epresensi.model.response.login.LoginResponse
-import com.rsudbrebes.epresensi.model.response.user.User
-import com.rsudbrebes.epresensi.ui.MainActivity
 import com.rsudbrebes.epresensi.ui.auth.AuthActivity
 
 class SigninFragment : Fragment(), SigninContract.View {
@@ -38,10 +35,7 @@ class SigninFragment : Fragment(), SigninContract.View {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         presenter = SigninPresenter(this)
-        val tvFooter = binding.includedFooter.tvFooter
-        tvFooter.text = activity?.getString(R.string.version)
-        tvFooter.setTextAppearance(R.style.versi_0_1_2)
-
+        (activity as AuthActivity)?.dispatchInformations(activity?.getString(R.string.version))
         if (!EPresensi.getApp().getUser().isNullOrEmpty()) {
             val submit = Intent(activity, AuthActivity::class.java)
             submit.putExtra("page_request", 2)
