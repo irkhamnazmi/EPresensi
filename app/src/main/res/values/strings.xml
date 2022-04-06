@@ -10,4 +10,11 @@
     <string name="sebelum_mel">Sebelum melanjutkan absensi, lengkapi terlebih dahulu data anda.</string>
     <string name="jl_jendral_">Jl. Jendral Sudirman No.181, Brebes, Jawa Tengah 52272</string>
     <string name="version">Versi 0.1.2</string>
+    <string-array name="ket_absen">
+        <item name="">Keterangan Absen</item>
+        <item name="hadir">Hadir</item>
+        <item name="sakit">Sakit</item>
+        <item name="ijin">Ijin</item>
+        <item name="absen">Absen</item>
+    </string-array>
 </resources>

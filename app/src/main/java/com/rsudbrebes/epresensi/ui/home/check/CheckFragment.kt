@@ -16,6 +16,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.SpinnerAdapter
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
@@ -48,13 +50,28 @@ class CheckFragment : Fragment(), CheckContract.View {
     var location: String = ""
     var absenStatus = ""
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentCheckBinding.inflate(inflater, container, false)
+        initSpinner()
         return binding.root
+    }
+
+    private fun initSpinner() {
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.ket_absen,
+            R.layout.spinner_list
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(R.layout.spinner_list)
+            // Apply the adapter to the spinner
+            binding.spKetAbsen.adapter = adapter
+        }
     }
 
 
@@ -67,7 +84,7 @@ class CheckFragment : Fragment(), CheckContract.View {
         binding.tvLogout.setOnClickListener {
             EPresensi.getApp().setUser("")
             EPresensi.getApp().setActive("")
-            val logout = Intent(activity!!,AuthActivity::class.java)
+            val logout = Intent(requireActivity(), AuthActivity::class.java)
             startActivity(logout)
             activity?.finish()
         }
@@ -81,9 +98,10 @@ class CheckFragment : Fragment(), CheckContract.View {
 
         val user = EPresensi.getApp().getUser()
         var userResponse = Gson().fromJson(user, User::class.java)
-        Glide.with(this).load(BASE_URL+"storage/profile/${userResponse.image}").into(binding.imageProfil);
+        Glide.with(this).load(BASE_URL + "storage/profile/${userResponse.image}")
+            .into(binding.imageProfil);
         binding.tvUsername.text = "Nama : ${userResponse.nama_lengkap}"
-        binding.tvNip.text = "NIP : ${userResponse.nip}"
+        binding.tvNip.text = "NIP : ${userResponse.kode_pegawai}"
         binding.tvJabatan.text = "Jabatan : ${userResponse.jabatan}"
         presenter.checkAbsen(userResponse.kode_pegawai)
     }
@@ -112,14 +130,14 @@ class CheckFragment : Fragment(), CheckContract.View {
     private fun getCurrentLocation() {
         // checking location permission
         if (ActivityCompat.checkSelfPermission(
-                activity!!,
+                requireActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
 
             // request permission
             ActivityCompat.requestPermissions(
-                activity!!,
+                requireActivity(),
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQ_CODE
             );
 
@@ -150,21 +168,21 @@ class CheckFragment : Fragment(), CheckContract.View {
     private fun checkBiometricSupport(): Boolean {
 
         val keyguardManager: KeyguardManager =
-            context!!.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+            requireContext().getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
 
         if (!keyguardManager.isKeyguardSecure) {
             notifyUser("Fingerprint has not been enabled in settings.")
             return false
         }
         if (ActivityCompat.checkSelfPermission(
-                context!!,
+                requireContext(),
                 android.Manifest.permission.USE_BIOMETRIC
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             notifyUser("Fingerprint has not been enabled in settings.")
             return false
         }
-        return if (context!!.packageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
+        return if (requireContext().packageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
             true
         } else true
     }
@@ -253,6 +271,9 @@ class CheckFragment : Fragment(), CheckContract.View {
         Log.d(TAG, "onCheckAbsenFailed: ${message}")
         if (message == "Jam Pulang") {
 //            binding.tvResult.text = message
+
+
+
             binding.btnCheckIn.setBackgroundResource(R.drawable.btn_from_uncheck_style)
             binding.btnCheckIn.setTextAppearance(R.style.selamat_datang)
             binding.btnCheckOut.setBackgroundResource(R.drawable.btn_from_checkout_style)
@@ -264,21 +285,21 @@ class CheckFragment : Fragment(), CheckContract.View {
                 absenStatus = "checkOut"
                 checkBiometricSupport()
                 val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(activity)
-            .setTitle("Presensi dulu")
-            .setSubtitle("Dibutuhkan bukti hadir")
-            .setDescription("Gunakan sidik jari milik Anda")
-            .setNegativeButton(
-                "Batal",
-                context!!.mainExecutor,
-                DialogInterface.OnClickListener { dialog, which ->
+                    .setTitle("Presensi dulu")
+                    .setSubtitle("Dibutuhkan bukti hadir")
+                    .setDescription("Gunakan sidik jari milik Anda")
+                    .setNegativeButton(
+                        "Batal",
+                        requireContext().mainExecutor,
+                        DialogInterface.OnClickListener { dialog, which ->
 
-                }).build()
+                        }).build()
 
-        biometricPrompt.authenticate(
-            getCancellationSignal(),
-            context!!.mainExecutor,
-            authenticationCallback
-        )
+                biometricPrompt.authenticate(
+                    getCancellationSignal(),
+                    requireContext().mainExecutor,
+                    authenticationCallback
+                )
             }
         } else if (message == "Belum Absen") {
 //            binding.tvResult.text = message
@@ -291,21 +312,21 @@ class CheckFragment : Fragment(), CheckContract.View {
                 absenStatus = "checkIn"
                 checkBiometricSupport()
                 val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(activity)
-            .setTitle("Presensi dulu")
-            .setSubtitle("Dibutuhkan bukti hadir")
-            .setDescription("Gunakan sidik jari milik Anda")
-            .setNegativeButton(
-                "Batal",
-                context!!.mainExecutor,
-                DialogInterface.OnClickListener { dialog, which ->
+                    .setTitle("Presensi dulu")
+                    .setSubtitle("Dibutuhkan bukti hadir")
+                    .setDescription("Gunakan sidik jari milik Anda")
+                    .setNegativeButton(
+                        "Batal",
+                        requireContext().mainExecutor,
+                        DialogInterface.OnClickListener { dialog, which ->
 
-                }).build()
+                        }).build()
 
-            biometricPrompt.authenticate(
-                getCancellationSignal(),
-                context!!.mainExecutor,
-                authenticationCallback
-            )
+                biometricPrompt.authenticate(
+                    getCancellationSignal(),
+                    requireContext().mainExecutor,
+                    authenticationCallback
+                )
             }
         }
 
@@ -316,7 +337,11 @@ class CheckFragment : Fragment(), CheckContract.View {
         val bundle = Bundle()
         bundle.putString("status", absenStatus)
         view?.let { Navigation.findNavController(it).navigate(R.id.action_check_success, bundle) }
-        Toast.makeText(context, "Anda Berhasi Absen Hari ini ${absensiResponse}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            context,
+            "Anda Berhasi Absen Hari ini ${absensiResponse}",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun onCheckFailed(message: String) {
