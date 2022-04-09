@@ -285,23 +285,34 @@ class CheckFragment : Fragment(), CheckContract.View, AdapterView.OnItemSelected
 //                    LocationServices.getFusedLocationProviderClient(requireActivity())
 //                getCurrentLocation()
                 absenStatus = "checkOut"
-                checkBiometricSupport()
-                val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(activity)
-                    .setTitle("Presensi dulu")
-                    .setSubtitle("Dibutuhkan bukti hadir")
-                    .setDescription("Gunakan sidik jari milik Anda")
-                    .setNegativeButton(
-                        "Batal",
-                        requireContext().mainExecutor,
-                        DialogInterface.OnClickListener { dialog, which ->
+//                checkBiometricSupport()
+//                val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(activity)
+//                    .setTitle("Presensi dulu")
+//                    .setSubtitle("Dibutuhkan bukti hadir")
+//                    .setDescription("Gunakan sidik jari milik Anda")
+//                    .setNegativeButton(
+//                        "Batal",
+//                        requireContext().mainExecutor,
+//                        DialogInterface.OnClickListener { dialog, which ->
+//
+//                        }).build()
+//
+//                biometricPrompt.authenticate(
+//                    getCancellationSignal(),
+//                    requireContext().mainExecutor,
+//                    authenticationCallback
+//                )
 
-                        }).build()
-
-                biometricPrompt.authenticate(
-                    getCancellationSignal(),
-                    requireContext().mainExecutor,
-                    authenticationCallback
+                val user = EPresensi.getApp().getUser()
+                var userResponse = Gson().fromJson(user, User::class.java)
+                var data = AbsensiRequest(
+                    userResponse.nama_lengkap,
+                    userResponse.kode_pegawai,
+                    "Bekerja di Kantor",
+                    location,
+                    1
                 )
+                presenter.submitCheck(data)
             }
         } else if (message == "Belum Absen") {
 //            binding.tvResult.text = message
@@ -312,23 +323,34 @@ class CheckFragment : Fragment(), CheckContract.View, AdapterView.OnItemSelected
 //                    LocationServices.getFusedLocationProviderClient(requireActivity())
 //                getCurrentLocation()
                 absenStatus = "checkIn"
-                checkBiometricSupport()
-                val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(activity)
-                    .setTitle("Presensi dulu")
-                    .setSubtitle("Dibutuhkan bukti hadir")
-                    .setDescription("Gunakan sidik jari milik Anda")
-                    .setNegativeButton(
-                        "Batal",
-                        requireContext().mainExecutor,
-                        DialogInterface.OnClickListener { dialog, which ->
+//                checkBiometricSupport()
+//                val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(activity)
+//                    .setTitle("Presensi dulu")
+//                    .setSubtitle("Dibutuhkan bukti hadir")
+//                    .setDescription("Gunakan sidik jari milik Anda")
+//                    .setNegativeButton(
+//                        "Batal",
+//                        requireContext().mainExecutor,
+//                        DialogInterface.OnClickListener { dialog, which ->
+//
+//                        }).build()
+//
+//                biometricPrompt.authenticate(
+//                    getCancellationSignal(),
+//                    requireContext().mainExecutor,
+//                    authenticationCallback
+//                )
 
-                        }).build()
-
-                biometricPrompt.authenticate(
-                    getCancellationSignal(),
-                    requireContext().mainExecutor,
-                    authenticationCallback
+                val user = EPresensi.getApp().getUser()
+                var userResponse = Gson().fromJson(user, User::class.java)
+                var data = AbsensiRequest(
+                    userResponse.nama_lengkap,
+                    userResponse.kode_pegawai,
+                    "Bekerja di Kantor",
+                    location,
+                    1
                 )
+                presenter.submitCheck(data)
             }
         }
 

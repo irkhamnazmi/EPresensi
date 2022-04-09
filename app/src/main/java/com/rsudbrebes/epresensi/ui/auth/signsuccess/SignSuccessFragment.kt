@@ -1,15 +1,22 @@
 package com.rsudbrebes.epresensi.ui.auth.signsuccess
 
 import android.app.AlertDialog
+import android.content.ActivityNotFoundException
 import android.content.DialogInterface
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.ValueCallback
+import android.webkit.WebChromeClient
+import android.webkit.WebSettings
 import android.webkit.WebView
 import android.widget.EditText
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.gson.Gson
@@ -28,6 +35,13 @@ class SignSuccessFragment : Fragment(), SignSuccessContract.View {
     private lateinit var binding: FragmentSignSuccessBinding
     lateinit var presenter: SignSuccessPresenter
     private lateinit var alertDialog: AlertDialog
+
+    private var mUploadMessage: ValueCallback<Uri>? = null
+
+    var uploadMessage:ValueCallback<Array<Uri>>? = null
+
+    val REQUEST_SELECT_FILE = 100
+    private val FILECHOOSER_RESULTCODE = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,6 +77,7 @@ class SignSuccessFragment : Fragment(), SignSuccessContract.View {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCheckSuccess(registerResponse: RegisterResponse) {
 
         if (registerResponse.register.kode_pegawai.isEmpty()) {
@@ -110,6 +125,7 @@ class SignSuccessFragment : Fragment(), SignSuccessContract.View {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun showCustomDialog(url : String) {
         val inflater: LayoutInflater = this.getLayoutInflater()
         val dialogView: View = inflater.inflate(R.layout.showdialog_webview, null)
@@ -119,7 +135,90 @@ class SignSuccessFragment : Fragment(), SignSuccessContract.View {
         inputField.isFocusable = true
         web.loadUrl(url)
         val webSettings = web.settings
+
         webSettings.javaScriptEnabled = true
+        webSettings.builtInZoomControls = true
+        webSettings.displayZoomControls = true
+        webSettings.domStorageEnabled = true
+        webSettings.allowContentAccess = true
+        webSettings.setAppCacheEnabled(false)
+        webSettings.cacheMode = WebSettings.LOAD_NO_CACHE
+        webSettings.setGeolocationEnabled(true)      // life saver, do not remove
+
+        web?.webChromeClient = object: WebChromeClient() {
+
+            protected fun openFileChooser(uploadMsg: ValueCallback<Uri>?, acceptType: String?) {
+                mUploadMessage = uploadMsg
+                val i = Intent(Intent.ACTION_GET_CONTENT)
+                i.addCategory(Intent.CATEGORY_OPENABLE)
+                i.type = "image/*"
+                startActivityForResult(
+                    Intent.createChooser(i, "File Browser"),
+                    FILECHOOSER_RESULTCODE
+                )
+            }
+
+
+            // For Lollipop 5.0+ Devices
+            override fun onShowFileChooser(
+                mWebView: WebView?,
+                filePathCallback: ValueCallback<Array<Uri>>?,
+                fileChooserParams: FileChooserParams
+            ): Boolean {
+                if (uploadMessage != null) {
+                    uploadMessage!!.onReceiveValue(null)
+                    uploadMessage = null
+                }
+                uploadMessage = filePathCallback
+                val intent = fileChooserParams.createIntent()
+                try {
+                    startActivityForResult(intent, REQUEST_SELECT_FILE)
+                } catch (e: ActivityNotFoundException) {
+                    uploadMessage = null
+                    Toast.makeText(
+                        activity!!.applicationContext,
+                        "Cannot Open File Chooser",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    return false
+                }
+                return true
+            }
+
+            //For Android 4.1 only
+            protected fun openFileChooser(
+                uploadMsg: ValueCallback<Uri>?,
+                acceptType: String?,
+                capture: String?
+            ) {
+                mUploadMessage = uploadMsg
+                val intent = Intent(Intent.ACTION_GET_CONTENT)
+                intent.addCategory(Intent.CATEGORY_OPENABLE)
+                intent.type = "image/*"
+                startActivityForResult(
+                    Intent.createChooser(intent, "File Browser"),
+                    FILECHOOSER_RESULTCODE
+                )
+            }
+
+            protected fun openFileChooser(uploadMsg: ValueCallback<Uri>?) {
+                mUploadMessage = uploadMsg
+                val i = Intent(Intent.ACTION_GET_CONTENT)
+                i.addCategory(Intent.CATEGORY_OPENABLE)
+                i.type = "image/*"
+                startActivityForResult(
+                    Intent.createChooser(i, "File Chooser"),
+                    FILECHOOSER_RESULTCODE
+                )
+            }
+            }
+
+
+
+
+
+
+
 
 
 
@@ -137,5 +236,29 @@ class SignSuccessFragment : Fragment(), SignSuccessContract.View {
         alertDialog.show()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        {
+            if(requestCode == REQUEST_SELECT_FILE){
+                if(uploadMessage != null){
+                    uploadMessage?.onReceiveValue(WebChromeClient.FileChooserParams.parseResult(resultCode,data))
+                    uploadMessage = null
+                }
+            }
+        }else if(requestCode == FILECHOOSER_RESULTCODE){
+            if(mUploadMessage!=null){
+                var result = data?.data
+                mUploadMessage?.onReceiveValue(result)
+                mUploadMessage = null
+            }
+        }else{
+            Toast.makeText(context,"Failed to open file uploader, please check app permissions.",Toast.LENGTH_LONG).show()
+            super.onActivityResult(requestCode, resultCode, data)
+        }
+
+
+    }
 
 }
+
