@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.hardware.biometrics.BiometricPrompt
 import android.os.Build
 import android.os.Bundle
@@ -16,8 +17,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.SpinnerAdapter
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
@@ -36,7 +38,7 @@ import com.rsudbrebes.epresensi.model.response.user.User
 import com.rsudbrebes.epresensi.ui.auth.AuthActivity
 
 
-class CheckFragment : Fragment(), CheckContract.View {
+class CheckFragment : Fragment(), CheckContract.View, AdapterView.OnItemSelectedListener {
 
     private lateinit var binding: FragmentCheckBinding
     lateinit var presenter: CheckPresenter
@@ -44,8 +46,13 @@ class CheckFragment : Fragment(), CheckContract.View {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var mHandler: Handler
+    lateinit var tvUsername: TextView
+    lateinit var tvJabatan: TextView
+    lateinit var tvNip: TextView
 
     private var cancellationSignal: CancellationSignal? = null
+    val user = EPresensi.getApp().getUser()
+    var userResponse = Gson().fromJson(user, User::class.java)
 
     var location: String = ""
     var absenStatus = ""
@@ -57,30 +64,27 @@ class CheckFragment : Fragment(), CheckContract.View {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentCheckBinding.inflate(inflater, container, false)
-        initSpinner()
+        initPresenter()
+
         return binding.root
     }
 
-    private fun initSpinner() {
-        ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.ket_absen,
-            R.layout.spinner_list
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(R.layout.spinner_list)
-            // Apply the adapter to the spinner
-            binding.spKetAbsen.adapter = adapter
-        }
+    private fun initPresenter() {
+        presenter = CheckPresenter(this)
+        presenter.spinner(requireContext())
     }
 
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        presenter = CheckPresenter(this)
         initView()
+        initLogout()
 
+    }
+
+
+    private fun initLogout() {
         binding.tvLogout.setOnClickListener {
             EPresensi.getApp().setUser("")
             EPresensi.getApp().setActive("")
@@ -88,21 +92,22 @@ class CheckFragment : Fragment(), CheckContract.View {
             startActivity(logout)
             activity?.finish()
         }
-
-
     }
 
 
     @RequiresApi(Build.VERSION_CODES.P)
     fun initView() {
+        tvUsername = binding.tvUsername
+        tvJabatan = binding.tvJabatan
+        tvNip = binding.tvNip
 
-        val user = EPresensi.getApp().getUser()
-        var userResponse = Gson().fromJson(user, User::class.java)
         Glide.with(this).load(BASE_URL + "storage/profile/${userResponse.image}")
-            .into(binding.imageProfil);
-        binding.tvUsername.text = "Nama : ${userResponse.nama_lengkap}"
-        binding.tvNip.text = "NIP : ${userResponse.kode_pegawai}"
-        binding.tvJabatan.text = "Jabatan : ${userResponse.jabatan}"
+            .into(binding.imageProfil)
+
+        tvUsername.text = "Nama : ${userResponse.nama_lengkap}"
+        tvNip.text = "NIP : ${userResponse.kode_pegawai}"
+        tvJabatan.text = "Jabatan : ${userResponse.jabatan}"
+
         presenter.checkAbsen(userResponse.kode_pegawai)
     }
 
@@ -127,41 +132,41 @@ class CheckFragment : Fragment(), CheckContract.View {
         }
     }
 
-    private fun getCurrentLocation() {
-        // checking location permission
-        if (ActivityCompat.checkSelfPermission(
-                requireActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-
-            // request permission
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQ_CODE
-            );
-
-            return
-
-        }
-
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener { location ->
-                val latitude = location.latitude
-                val longitude = location.longitude
-                val latitudeTo = -6.874072867659325
-                val longitudeTo = 109.04892526906285
-
-//                presenter.locationDistance(latitude, longitude, latitudeTo, longitudeTo)
-
-            }
-            .addOnFailureListener {
-                Toast.makeText(
-                    context, "Failed on getting current location",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-    }
+//    private fun getCurrentLocation() {
+//        // checking location permission
+//        if (ActivityCompat.checkSelfPermission(
+//                requireActivity(),
+//                Manifest.permission.ACCESS_FINE_LOCATION
+//            ) != PackageManager.PERMISSION_GRANTED
+//        ) {
+//
+//            // request permission
+//            ActivityCompat.requestPermissions(
+//                requireActivity(),
+//                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQ_CODE
+//            );
+//
+//            return
+//
+//        }
+//
+//        fusedLocationClient.lastLocation
+//            .addOnSuccessListener { location ->
+//                val latitude = location.latitude
+//                val longitude = location.longitude
+//                val latitudeTo = -6.874072867659325
+//                val longitudeTo = 109.04892526906285
+//
+////                presenter.locationDistance(latitude, longitude, latitudeTo, longitudeTo)
+//
+//            }
+//            .addOnFailureListener {
+//                Toast.makeText(
+//                    context, "Failed on getting current location",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//            }
+//    }
 
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -222,7 +227,6 @@ class CheckFragment : Fragment(), CheckContract.View {
                         location,
                         1
                     )
-
                     presenter.submitCheck(data)
 
 
@@ -272,12 +276,10 @@ class CheckFragment : Fragment(), CheckContract.View {
         if (message == "Jam Pulang") {
 //            binding.tvResult.text = message
 
-
-
             binding.btnCheckIn.setBackgroundResource(R.drawable.btn_from_uncheck_style)
             binding.btnCheckIn.setTextAppearance(R.style.selamat_datang)
             binding.btnCheckOut.setBackgroundResource(R.drawable.btn_from_checkout_style)
-            binding.btnCheckOut.setTextAppearance(R.style.login)
+            binding.btnCheckOut.setTextColor(Color.parseColor("#FFFFFF"))
             binding.btnCheckOut.setOnClickListener {
 //                fusedLocationClient =
 //                    LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -332,6 +334,16 @@ class CheckFragment : Fragment(), CheckContract.View {
 
     }
 
+    override fun showKetAbsen(adapter: ArrayAdapter<String>) {
+        binding.spKetAbsen.adapter = adapter
+        binding.spKetAbsen.onItemSelectedListener = this
+    }
+
+    override fun showShift(adapter: ArrayAdapter<CharSequence>) {
+        binding.spShift.adapter = adapter
+        binding.spShift.onItemSelectedListener = this
+    }
+
     override fun onCheckSuccess(absensiResponse: AbsensiResponse) {
 //        view?.let { Navigation.findNavController(it).navigate(R.id.action_check_success) }
         val bundle = Bundle()
@@ -355,6 +367,15 @@ class CheckFragment : Fragment(), CheckContract.View {
     }
 
     override fun dismissLoading() {
+
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, long: Long) {
+        Toast.makeText(context, parent?.getItemAtPosition(pos).toString(), Toast.LENGTH_SHORT)
+            .show()
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
 
     }
 

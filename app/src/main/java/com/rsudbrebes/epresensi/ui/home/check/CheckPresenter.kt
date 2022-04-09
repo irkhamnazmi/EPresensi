@@ -1,13 +1,19 @@
 package com.rsudbrebes.epresensi.ui.home.check
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
 import android.hardware.biometrics.BiometricPrompt
+import android.widget.ArrayAdapter
+import androidx.core.content.ContentProviderCompat.requireContext
+import com.rsudbrebes.epresensi.R
 import com.rsudbrebes.epresensi.model.request.AbsensiRequest
 import com.rsudbrebes.epresensi.network.HttpClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import java.math.MathContext
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
@@ -75,6 +81,45 @@ class CheckPresenter (private val view: CheckContract.View) : CheckContract.Pres
             )
         mCompositeDisposable!!.add(disposable)
     }
+
+    @SuppressLint("ResourceType")
+    override fun spinner(context: Context) {
+        ArrayAdapter<String>(
+            context,
+            R.layout.spinner_list,
+            R.array.ket_absen
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(R.layout.spinner_list)
+
+            // Apply the adapter to the spinner
+            view.showKetAbsen(adapter)
+        }
+//        ArrayAdapter.createFromResource(
+//            context,
+//            R.array.ket_absen,
+//            R.layout.spinner_list
+//        ).also { adapter ->
+//            // Specify the layout to use when the list of choices appears
+//            adapter.setDropDownViewResource(R.layout.spinner_list)
+//            // Apply the adapter to the spinner
+//            view.showKetAbsen(adapter)
+//        }
+
+        ArrayAdapter.createFromResource(
+            context,
+            R.array.shift_option,
+            R.layout.spinner_list
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(R.layout.spinner_list)
+            // Apply the adapter to the spinner
+            view.showShift(adapter)
+
+        }
+    }
+
+
 
 
     override fun subscribe() {
