@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -113,9 +114,15 @@ class SignSuccessFragment : Fragment(), SignSuccessContract.View {
         val inflater: LayoutInflater = this.getLayoutInflater()
         val dialogView: View = inflater.inflate(R.layout.showdialog_webview, null)
         val web = dialogView.findViewById<WebView>(R.id.webview1)
+        val inputField = dialogView.findViewById<EditText>(R.id.inputField)
+        inputField.requestFocus()
+        inputField.isFocusable = true
         web.loadUrl(url)
         val webSettings = web.settings
         webSettings.javaScriptEnabled = true
+
+
+
 
         val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(context)
         dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {
