@@ -17,7 +17,7 @@ interface CheckContract {
         fun onCheckFailed(message: String)
         fun onCheckAbsenSuccess(absensiResponse: AbsensiResponse)
         fun onCheckAbsenFailed(message: String)
-        fun showKetAbsen(adapter: ArrayAdapter<String>)
+        fun showKetAbsen(adapter: ArrayAdapter<CharSequence>)
         fun showShift(adapter : ArrayAdapter<CharSequence>)
 
 

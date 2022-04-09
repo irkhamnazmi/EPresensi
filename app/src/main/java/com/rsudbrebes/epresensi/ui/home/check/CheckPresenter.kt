@@ -84,27 +84,17 @@ class CheckPresenter (private val view: CheckContract.View) : CheckContract.Pres
 
     @SuppressLint("ResourceType")
     override fun spinner(context: Context) {
-        ArrayAdapter<String>(
+
+        ArrayAdapter.createFromResource(
             context,
-            R.layout.spinner_list,
-            R.array.ket_absen
+            R.array.ket_absen,
+            R.layout.spinner_list
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(R.layout.spinner_list)
-
             // Apply the adapter to the spinner
             view.showKetAbsen(adapter)
         }
-//        ArrayAdapter.createFromResource(
-//            context,
-//            R.array.ket_absen,
-//            R.layout.spinner_list
-//        ).also { adapter ->
-//            // Specify the layout to use when the list of choices appears
-//            adapter.setDropDownViewResource(R.layout.spinner_list)
-//            // Apply the adapter to the spinner
-//            view.showKetAbsen(adapter)
-//        }
 
         ArrayAdapter.createFromResource(
             context,
