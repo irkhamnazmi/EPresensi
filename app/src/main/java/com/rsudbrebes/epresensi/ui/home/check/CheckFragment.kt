@@ -334,7 +334,7 @@ class CheckFragment : Fragment(), CheckContract.View, AdapterView.OnItemSelected
 
     }
 
-    override fun showKetAbsen(adapter: ArrayAdapter<String>) {
+    override fun showKetAbsen(adapter: ArrayAdapter<CharSequence>) {
         binding.spKetAbsen.adapter = adapter
         binding.spKetAbsen.onItemSelectedListener = this
     }
