@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_marginTop="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="10dp"
+        >
+
+        <include
+            android:id="@+id/included_header"
+            layout="@layout/layout_header_auth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:id="@+id/tvAlert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            tools:text="Selamat anda"
+            android:textAlignment="center"
+            android:textAppearance="@style/selamat_datang" />
+
+        <TextView
+            android:id="@+id/tvSuccess"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:text="Berhasil"
+            android:textAlignment="center"
+            android:textColor="#2D7CF3"
+            android:textAppearance="@style/absensi"
+            android:fontFamily="@font/poppins_bold"
+            />
+
+        <TextView
+            android:id="@+id/tvCheck"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Check-In"
+            android:layout_marginTop="-5dp"
+            android:textAlignment="center"
+            android:textAppearance="@style/absensi"
+            android:fontFamily="@font/poppins_bold"
+            />
+
+
+
+
+
+
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

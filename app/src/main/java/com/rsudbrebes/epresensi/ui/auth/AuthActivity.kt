@@ -1,6 +1,7 @@
 package com.rsudbrebes.epresensi.ui.auth
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavOptions
@@ -26,6 +27,12 @@ class AuthActivity : AppCompatActivity() {
 //            Navigation.findNavController(findViewById(R.id.authHostFragment))
 //                .navigate(R.id.action_signin, null,navOption)
 //        }
+        binding.swReload.setOnRefreshListener {
+
+            startActivity(intent)
+            overridePendingTransition(0,0)
+            finish()
+        }
 
 
 
@@ -33,5 +40,17 @@ class AuthActivity : AppCompatActivity() {
 
     fun dispatchInformations(mesg: String?) {
         binding.includedFooter.tvFooter.text = mesg
+    }
+    fun dispatchAction(act : String?){
+        if(act == "GONE"){
+            binding.includedHeader.root.visibility = View.GONE
+            binding.includedFooter.root.visibility = View.GONE
+            binding.swReload.isEnabled = false
+        } else{
+            binding.includedHeader.root.visibility = View.VISIBLE
+            binding.includedFooter.root.visibility = View.VISIBLE
+            binding.swReload.isEnabled = true
+        }
+
     }
 }

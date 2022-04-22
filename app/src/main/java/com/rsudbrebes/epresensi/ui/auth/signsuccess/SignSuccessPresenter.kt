@@ -1,5 +1,7 @@
 package com.rsudbrebes.epresensi.ui.auth.signsuccess
 
+import android.graphics.Bitmap
+import android.net.Uri
 import com.rsudbrebes.epresensi.network.HttpClient
 import com.rsudbrebes.epresensi.ui.auth.signin.SigninContract
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -31,6 +33,10 @@ class SignSuccessPresenter (private val view: SignSuccessContract.View ) : SignS
                 }
             )
         mCompositeDisposable!!.add(disposable)
+    }
+
+    override fun getUri(uri: Uri) {
+       view.postUri(uri)
     }
 
     override fun subscribe() {

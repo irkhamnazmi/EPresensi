@@ -17,11 +17,12 @@
 
     <fragment android:id="@+id/fragmentCheckSuccess"
         android:name="com.rsudbrebes.epresensi.ui.home.checksuccess.CheckSuccessFragment"
-        tools:layout="@layout/fragment_check_success">
+        tools:layout="@layout/showdialog_check_success">
 
 
-
-
+        <action
+            android:id="@+id/action_check"
+            app:destination="@id/fragmentCheck" />
     </fragment>
 
 </navigation>

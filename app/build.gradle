@@ -39,7 +39,8 @@ android {
     productFlavors{
         dev {
             applicationId = "com.rsudbrebes.epresensi.dev"
-            buildConfigField ("String", "BASE_URL","\"https://www.e-absenrsudbrebesonline.my.id/public/\"")
+//            buildConfigField ("String", "BASE_URL","\"https://sub.e-absenrsudbrebesonline.my.id/public/\"")
+            buildConfigField ("String", "BASE_URL","\"https://e-absenrsudbrebesonline.my.id/public/\"")
         }
     }
 
@@ -84,6 +85,10 @@ dependencies {
 //    implementation 'com.google.firebase:firebase-dynamic-links:19.0.0'
     def biometricLibraryVersion = "1.0.1"
     implementation "androidx.biometric:biometric:$biometricLibraryVersion"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+
+
 
 
 

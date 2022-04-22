@@ -56,7 +56,6 @@ class SignupFragment : Fragment(), SignupContract.View {
         }
 
         binding.btnSignup.setOnClickListener {
-//            var fullName = binding.edtFullname
             var username = binding.edtUsername
             var password = binding.edtPassword
             var email = binding.edtEmail

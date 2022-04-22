@@ -11,7 +11,9 @@
 
         <action android:id="@+id/action_signin"
             app:destination="@+id/fragmentSignIn"/>
-
+        <action
+            android:id="@+id/action_sign_complete"
+            app:destination="@id/fragmentSignComplete" />
 
 
     </fragment>
@@ -35,6 +37,15 @@
         <action android:id="@+id/action_signin"
             app:destination="@id/fragmentSignIn"/>
 
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentSignComplete"
+        android:name="com.rsudbrebes.epresensi.ui.auth.signcomplete.SignCompleteFragment"
+        android:label="fragment_sign_complete"
+        tools:layout="@layout/fragment_sign_complete" >
+        <action
+            android:id="@+id/action_sign_success"
+            app:destination="@id/fragmentSignSuccess" />
     </fragment>
 
 
