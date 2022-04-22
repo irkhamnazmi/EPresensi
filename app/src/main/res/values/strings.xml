@@ -8,6 +8,7 @@
     <string name="belum_punya_akun">Belum punya akun?  </string>
     <string name="powered_by_">Powered by:\nTeam IT RSUD BREBES</string>
     <string name="sebelum_mel">Sebelum melanjutkan absensi, lengkapi terlebih dahulu data anda.</string>
+    <string name="sesudah_mel">Silahkan untuk melanjutkan sesi ini dan pastikan segera melakukan absen dengan tepat waktu.</string>
     <string name="jl_jendral_">Jl. Jendral Sudirman No.181, Brebes, Jawa Tengah 52272</string>
     <string name="version">Versi 0.1.2</string>
     <string-array name="ket_absen">
@@ -15,12 +16,14 @@
         <item name="hadir">Hadir</item>
         <item name="sakit">Sakit</item>
         <item name="ijin">Ijin</item>
-        <item name="absen">Absen</item>
+        <item name="cuti">Cuti</item>
+        <item name="dinas_luar_kota">Dinas Luar Kota</item>
+        <item name="bebas_tugas">Bebas Tugas</item>
     </string-array>
     <string-array name="shift_option">
         <item name="">Pilih Shift</item>
-        <item name="pagi">Shift Pagi</item>
-        <item name="siang">Shift Siang</item>
-        <item name="malam">Shift Malam</item>
+        <item name="pagi">Pagi</item>
+        <item name="siang">Siang</item>
+        <item name="malam">Malam</item>
     </string-array>
 </resources>

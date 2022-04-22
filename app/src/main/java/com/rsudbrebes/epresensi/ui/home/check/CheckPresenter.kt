@@ -36,11 +36,12 @@ class CheckPresenter (private val view: CheckContract.View) : CheckContract.Pres
 //        }
 //    }
 
-    override fun submitCheck(absensiRequest: AbsensiRequest) {
+    override fun submitCheck(absensiRequest: AbsensiRequest, status : String) {
         val disposable = HttpClient.getInstance().getApi()!!.absenPost(
             absensiRequest.nama_pegawai,
             absensiRequest.kode_pegawai,
             absensiRequest.keterangan_absen,
+            absensiRequest.alasan,
             absensiRequest.maps_absen,
             absensiRequest.status_setting
             )
@@ -51,13 +52,13 @@ class CheckPresenter (private val view: CheckContract.View) : CheckContract.Pres
 
 
                     if (it.meta?.status.equals("success",true)){
-                        it.data?.let { it1 -> view.onCheckSuccess(it1) }
+                        it.data?.let { it1 -> view.onCheckSuccess(it1, status) }
                     } else {
-                        it.meta?.message?.let { it1 -> view.onCheckFailed(it1) }
+                        it.meta?.message?.let { it1 -> view.onCheckFailed(it1, status) }
                     }
                 },
                 {
-                    view.onCheckFailed(it.message.toString())
+                    view.onCheckFailed(it.message.toString(), status)
                 }
             )
         mCompositeDisposable!!.add(disposable)
@@ -96,17 +97,7 @@ class CheckPresenter (private val view: CheckContract.View) : CheckContract.Pres
             view.showKetAbsen(adapter)
         }
 
-        ArrayAdapter.createFromResource(
-            context,
-            R.array.shift_option,
-            R.layout.spinner_list
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(R.layout.spinner_list)
-            // Apply the adapter to the spinner
-            view.showShift(adapter)
 
-        }
     }
 
 

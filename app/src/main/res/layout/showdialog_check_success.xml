@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    tools:context=".ui.home.checksuccess.CheckSuccessFragment">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_marginTop="32dp"
@@ -16,22 +15,28 @@
         android:paddingHorizontal="10dp"
         >
 
+        <include
+            android:id="@+id/included_header"
+            layout="@layout/layout_header_auth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
 
         <TextView
+            android:id="@+id/tvAlert"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Selamat anda"
-            android:textAlignment="center"
             android:fontFamily="@font/poppins_medium"
-            android:textAppearance="@style/selamat_datang"
-            />
+            tools:text="Selamat anda"
+            android:textAlignment="center"
+            android:textAppearance="@style/selamat_datang" />
 
         <TextView
             android:id="@+id/tvSuccess"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Berhasil"
+            tools:text="Berhasil"
             android:textAlignment="center"
             android:textColor="#2D7CF3"
             android:textAppearance="@style/absensi"
@@ -42,7 +47,6 @@
             android:id="@+id/tvCheck"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#2D7CF3"
             tools:text="Check-In"
             android:layout_marginTop="-5dp"
             android:textAlignment="center"

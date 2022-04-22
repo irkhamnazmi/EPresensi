@@ -25,6 +25,7 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -35,7 +36,7 @@
     <style name="absensi">
 
         <item name="android:textSize">
-            25.81sp
+            15.81sp
         </item>
 
 
@@ -49,7 +50,7 @@
     <style name="online">
 
         <item name="android:textSize">
-            12.22sp
+            10.22sp
         </item>
 
         <item name="android:letterSpacing">
@@ -136,7 +137,7 @@
     <style name="userlogin">
 
         <item name="android:textSize">
-            24sp
+            18sp
         </item>
 
         <item name="android:textColor">
@@ -149,7 +150,7 @@
     <style name="lanjutkan">
 
         <item name="android:textSize">
-            14sp
+            12sp
         </item>
 
         <item name="android:textColor">
@@ -211,6 +212,17 @@
         </item>
 
     </style>
+
+    <style name="fullscreenalert" parent="Theme.EPresensi.noActionBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="backgroundColor">#ffffff</item>
+        <item name="android:statusBarColor">@color/teal_200</item>
+
+
+    </style>
+
 
 
 

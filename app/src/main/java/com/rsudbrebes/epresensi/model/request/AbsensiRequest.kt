@@ -17,10 +17,14 @@ class AbsensiRequest (
     @SerializedName("keterangan_absen")
     var keterangan_absen : String,
     @Expose
+    @SerializedName("alasan")
+    var alasan : String,
+    @Expose
     @SerializedName("maps_absen")
     var maps_absen : String,
     @Expose
     @SerializedName("status_setting")
     var status_setting : Int
+
 
 ): Parcelable

@@ -11,6 +11,9 @@ data class Absensi(
     @SerializedName("keterangan_absen")
     val keterangan_absen: String,
     @Expose
+    @SerializedName("alasan")
+    val alasan: String,
+    @Expose
     @SerializedName("kode_absen")
     val kode_absen: String,
     @Expose

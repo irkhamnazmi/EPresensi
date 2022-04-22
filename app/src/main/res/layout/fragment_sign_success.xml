@@ -30,18 +30,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
-            android:text="Yusril Izza Alfadli A"
+            tools:text="Yusril Izza Alfadli A"
             android:textAlignment="center"
             android:textAppearance="@style/userlogin"
             android:textColor="@color/black" />
 
         <TextView
+            android:id="@+id/tvKetKonfirmasi"
             style="@style/sebelum_mel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="57dp"
             android:fontFamily="@font/poppins"
-            android:text="@string/sebelum_mel" />
+            tools:text="@string/sebelum_mel" />
 
 
         <Button
@@ -54,7 +55,22 @@
             android:drawableEnd="@drawable/ic_arrow_right"
             android:fontFamily="@font/poppins_semibold"
             android:textAppearance="@style/lanjutkan"
-            tools:text="Lanjutkan Profil Anda   "
+            tools:text="Lengkapi Profil Anda   "
+
+            />
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:background="@android:color/transparent"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:fontFamily="@font/poppins_medium"
+            android:textStyle="italic"
+            tools:text="Ganti akun"
 
             />
 

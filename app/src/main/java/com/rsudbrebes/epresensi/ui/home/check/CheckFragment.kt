@@ -1,6 +1,8 @@
 package com.rsudbrebes.epresensi.ui.home.check
 
 import android.Manifest
+import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.app.KeyguardManager
 import android.content.ContentValues.TAG
 import android.content.Context
@@ -21,10 +23,12 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.gson.Gson
@@ -32,13 +36,16 @@ import com.rsudbrebes.epresensi.BuildConfig.BASE_URL
 import com.rsudbrebes.epresensi.EPresensi
 import com.rsudbrebes.epresensi.R
 import com.rsudbrebes.epresensi.databinding.FragmentCheckBinding
+import com.rsudbrebes.epresensi.databinding.ShowdialogCheckSuccessBinding
 import com.rsudbrebes.epresensi.model.request.AbsensiRequest
 import com.rsudbrebes.epresensi.model.response.absensi.AbsensiResponse
 import com.rsudbrebes.epresensi.model.response.user.User
 import com.rsudbrebes.epresensi.ui.auth.AuthActivity
+import java.text.SimpleDateFormat
+import java.util.*
 
 
-class CheckFragment : Fragment(), CheckContract.View, AdapterView.OnItemSelectedListener {
+class CheckFragment : Fragment(), CheckContract.View {
 
     private lateinit var binding: FragmentCheckBinding
     lateinit var presenter: CheckPresenter
@@ -55,7 +62,11 @@ class CheckFragment : Fragment(), CheckContract.View, AdapterView.OnItemSelected
     var userResponse = Gson().fromJson(user, User::class.java)
 
     var location: String = ""
+    var keterangan: String = ""
+    var shift: Int = 0
     var absenStatus = ""
+    private lateinit var alertDialog: AlertDialog
+
 
 
     override fun onCreateView(
@@ -84,6 +95,8 @@ class CheckFragment : Fragment(), CheckContract.View, AdapterView.OnItemSelected
     }
 
 
+
+
     private fun initLogout() {
         binding.tvLogout.setOnClickListener {
             EPresensi.getApp().setUser("")
@@ -109,6 +122,8 @@ class CheckFragment : Fragment(), CheckContract.View, AdapterView.OnItemSelected
         tvJabatan.text = "Jabatan : ${userResponse.jabatan}"
 
         presenter.checkAbsen(userResponse.kode_pegawai)
+
+        statusKet()
     }
 
 
@@ -218,17 +233,7 @@ class CheckFragment : Fragment(), CheckContract.View, AdapterView.OnItemSelected
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {
                     super.onAuthenticationSucceeded(result)
 //                    notifyUser("Anda berhasil hadir hari ini")
-                    val user = EPresensi.getApp().getUser()
-                    var userResponse = Gson().fromJson(user, User::class.java)
-                    var data = AbsensiRequest(
-                        userResponse.nama_lengkap,
-                        userResponse.kode_pegawai,
-                        "Bekerja di Kantor",
-                        location,
-                        1
-                    )
-                    presenter.submitCheck(data)
-
+                    postData()
 
                 }
             }
@@ -267,6 +272,8 @@ class CheckFragment : Fragment(), CheckContract.View, AdapterView.OnItemSelected
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCheckAbsenSuccess(absensiResponse: AbsensiResponse) {
         binding.btnCheckIn.setBackgroundResource(R.drawable.btn_from_uncheck_style)
+        binding.btnCheckOut.setBackgroundResource(R.drawable.btn_from_uncheck_style)
+        binding.btnSubmit.setBackgroundResource(R.drawable.btn_from_uncheck_style)
         binding.btnCheckIn.setTextAppearance(R.style.selamat_datang)
     }
 
@@ -284,7 +291,7 @@ class CheckFragment : Fragment(), CheckContract.View, AdapterView.OnItemSelected
 //                fusedLocationClient =
 //                    LocationServices.getFusedLocationProviderClient(requireActivity())
 //                getCurrentLocation()
-                absenStatus = "checkOut"
+                absenStatus = "CHECK OUT"
 //                checkBiometricSupport()
 //                val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(activity)
 //                    .setTitle("Presensi dulu")
@@ -303,16 +310,7 @@ class CheckFragment : Fragment(), CheckContract.View, AdapterView.OnItemSelected
 //                    authenticationCallback
 //                )
 
-                val user = EPresensi.getApp().getUser()
-                var userResponse = Gson().fromJson(user, User::class.java)
-                var data = AbsensiRequest(
-                    userResponse.nama_lengkap,
-                    userResponse.kode_pegawai,
-                    "Bekerja di Kantor",
-                    location,
-                    1
-                )
-                presenter.submitCheck(data)
+                postData()
             }
         } else if (message == "Belum Absen") {
 //            binding.tvResult.text = message
@@ -322,7 +320,7 @@ class CheckFragment : Fragment(), CheckContract.View, AdapterView.OnItemSelected
 //                fusedLocationClient =
 //                    LocationServices.getFusedLocationProviderClient(requireActivity())
 //                getCurrentLocation()
-                absenStatus = "checkIn"
+                absenStatus = "CHECK IN"
 //                checkBiometricSupport()
 //                val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(activity)
 //                    .setTitle("Presensi dulu")
@@ -341,16 +339,13 @@ class CheckFragment : Fragment(), CheckContract.View, AdapterView.OnItemSelected
 //                    authenticationCallback
 //                )
 
-                val user = EPresensi.getApp().getUser()
-                var userResponse = Gson().fromJson(user, User::class.java)
-                var data = AbsensiRequest(
-                    userResponse.nama_lengkap,
-                    userResponse.kode_pegawai,
-                    "Bekerja di Kantor",
-                    location,
-                    1
-                )
-                presenter.submitCheck(data)
+                postData()
+
+
+            }
+            binding.btnSubmit.setOnClickListener {
+                absenStatus = "Konfirmasi ${keterangan}"
+                postData()
             }
         }
 
@@ -358,29 +353,37 @@ class CheckFragment : Fragment(), CheckContract.View, AdapterView.OnItemSelected
 
     override fun showKetAbsen(adapter: ArrayAdapter<CharSequence>) {
         binding.spKetAbsen.adapter = adapter
-        binding.spKetAbsen.onItemSelectedListener = this
+        binding.spKetAbsen.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                keterangan = ""
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val x = parent?.getItemAtPosition(position).toString()
+                keterangan = if (x == "Ket.Absen") "" else x
+                statusKet()
+            }
+
+        }
+
     }
 
-    override fun showShift(adapter: ArrayAdapter<CharSequence>) {
-        binding.spShift.adapter = adapter
-        binding.spShift.onItemSelectedListener = this
-    }
 
-    override fun onCheckSuccess(absensiResponse: AbsensiResponse) {
+    @RequiresApi(Build.VERSION_CODES.P)
+    override fun onCheckSuccess(absensiResponse: AbsensiResponse, status : String) {
 //        view?.let { Navigation.findNavController(it).navigate(R.id.action_check_success) }
-        val bundle = Bundle()
-        bundle.putString("status", absenStatus)
-        view?.let { Navigation.findNavController(it).navigate(R.id.action_check_success, bundle) }
-        Toast.makeText(
-            context,
-            "Anda Berhasi Absen Hari ini ${absensiResponse}",
-            Toast.LENGTH_SHORT
-        ).show()
+        showCustomDialog("Success", status)
+
     }
 
-    override fun onCheckFailed(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-        Log.d(TAG, "onCheckFailed: ${message}")
+    @RequiresApi(Build.VERSION_CODES.P)
+    override fun onCheckFailed(message: String, status: String) {
+        showCustomDialog("Failed", status)
     }
 
 
@@ -392,13 +395,72 @@ class CheckFragment : Fragment(), CheckContract.View, AdapterView.OnItemSelected
 
     }
 
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, long: Long) {
-        Toast.makeText(context, parent?.getItemAtPosition(pos).toString(), Toast.LENGTH_SHORT)
-            .show()
+    private fun postData() {
+        val user = EPresensi.getApp().getUser()
+        if (keterangan.isEmpty()) {
+            Toast.makeText(context, "Harap dipilih keterangan Absen", Toast.LENGTH_SHORT).show()
+        } else {
+            var userResponse = Gson().fromJson(user, User::class.java)
+            var data = AbsensiRequest(
+                userResponse.nama_lengkap,
+                userResponse.kode_pegawai,
+                keterangan,
+                binding.edtAlasan.text.toString(),
+                location,
+                1
+            )
+
+            presenter.submitCheck(data, absenStatus)
+        }
     }
 
-    override fun onNothingSelected(p0: AdapterView<*>?) {
+    private fun statusKet() {
+        if (keterangan == "" || keterangan == "Hadir") {
+            binding.lnCheck.visibility = View.VISIBLE
+            binding.lnFormAlasan.visibility = View.GONE
+            binding.edtAlasan.setText("")
+        } else {
+            binding.lnCheck.visibility = View.GONE
+            binding.lnFormAlasan.visibility = View.VISIBLE
+            binding.edtAlasan.setText("")
 
+        }
     }
+
+    @RequiresApi(Build.VERSION_CODES.P)
+    fun showCustomDialog(condition: String, status: String) {
+        val inflater: LayoutInflater = this.layoutInflater
+        val bind: ShowdialogCheckSuccessBinding = ShowdialogCheckSuccessBinding.inflate(inflater)
+
+        val dialogBuilder: AlertDialog.Builder =
+            AlertDialog.Builder(context, R.style.fullscreenalert)
+        dialogBuilder.setOnDismissListener { }
+        dialogBuilder.setView(bind.root)
+        if (condition == "Success") {
+            bind.tvAlert.text = "Selamat Anda"
+            bind.tvSuccess.text = "Berhasil"
+
+        } else {
+            bind.tvAlert.text = "Maaf Anda"
+            bind.tvSuccess.text = "Gagal"
+        }
+        var color = ""
+        color = if(status == "CHECK IN") "#00fc28" else "#f44336"
+        bind.tvCheck.setTextColor(Color.parseColor(color))
+        bind.tvCheck.text = status
+        Handler().postDelayed({
+            alertDialog.dismiss()
+            initPresenter()
+            initView()
+        }, 2000)
+
+        alertDialog = dialogBuilder.create();
+//        alertDialog.window!!.getAttributes().windowAnimations = R.style.PauseDialogAnimation
+        alertDialog.window!!.getAttributes().windowAnimations =
+            R.style.Animation_Design_BottomSheetDialog
+//        alertDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent);
+        alertDialog.show()
+    }
+
 
 }
