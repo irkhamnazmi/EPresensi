@@ -40,7 +40,7 @@ class CheckPresenter (private val view: CheckContract.View) : CheckContract.Pres
         val disposable = HttpClient.getInstance().getApi()!!.absenPost(
             absensiRequest.nama_pegawai,
             absensiRequest.kode_pegawai,
-            absensiRequest.keterangan_absen,
+            absensiRequest.ket_absen,
             absensiRequest.alasan,
             absensiRequest.maps_absen,
             absensiRequest.status_setting

@@ -14,8 +14,8 @@ class AbsensiRequest (
     @SerializedName("kode_pegawai")
     var kode_pegawai : String,
     @Expose
-    @SerializedName("keterangan_absen")
-    var keterangan_absen : String,
+    @SerializedName("ket_absen")
+    var ket_absen : String,
     @Expose
     @SerializedName("alasan")
     var alasan : String,

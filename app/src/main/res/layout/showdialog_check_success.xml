@@ -15,11 +15,46 @@
         android:paddingHorizontal="10dp"
         >
 
-        <include
-            android:id="@+id/included_header"
-            layout="@layout/layout_header_auth"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:scaleType="fitCenter"
+                tools:src="@drawable/logors"
+                android:src="@drawable/logors"/>
+
+            <TextView
+                android:id="@+id/absensi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center_horizontal|top"
+                android:text="@string/absensi"
+                android:textSize="24dp"
+                android:textColor="#5BBFF5"
+                android:textAppearance="@style/absensi"
+                />
+
+            <TextView
+                android:id="@+id/online"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center_horizontal|top"
+                android:text="@string/online"
+                android:textSize="22dp"
+                android:textAppearance="@style/online"
+                />
+
+        </LinearLayout>
 
 
         <TextView
@@ -28,6 +63,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
             tools:text="Selamat anda"
+            android:textSize="28dp"
             android:textAlignment="center"
             android:textAppearance="@style/selamat_datang" />
 
@@ -39,6 +75,7 @@
             tools:text="Berhasil"
             android:textAlignment="center"
             android:textColor="#2D7CF3"
+            android:textSize="48dp"
             android:textAppearance="@style/absensi"
             android:fontFamily="@font/poppins_bold"
             />
@@ -50,6 +87,7 @@
             tools:text="Check-In"
             android:layout_marginTop="-5dp"
             android:textAlignment="center"
+            android:textSize="32dp"
             android:textAppearance="@style/absensi"
             android:fontFamily="@font/poppins_bold"
             />
