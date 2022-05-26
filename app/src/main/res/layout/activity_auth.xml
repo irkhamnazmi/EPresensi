@@ -28,7 +28,7 @@
                     layout="@layout/layout_header_auth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="28dp"/>
+                    android:layout_marginBottom="@dimen/auth_include_header_mb"/>
 
 
                 <LinearLayout
@@ -54,7 +54,7 @@
                     layout="@layout/layout_footer_copyright"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="179dp" />
+                    android:layout_marginTop="@dimen/auth_include_footer_mt" />
 
 
             </LinearLayout>

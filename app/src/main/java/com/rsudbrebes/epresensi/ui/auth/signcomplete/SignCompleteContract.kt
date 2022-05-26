@@ -16,6 +16,6 @@ interface SignCompleteContract {
 
     interface Presenter : SignCompleteContract, BasePresenter {
         fun submitComplete(completeRequest: CompleteRequest)
-        fun imageUpload(image : Uri)
+        fun imageUpload(filePath : Uri)
     }
 }

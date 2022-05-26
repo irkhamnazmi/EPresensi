@@ -27,6 +27,7 @@ interface EndPoint {
         @Field("ket_absen") ket_absen: String,
         @Field("alasan") alasan: String,
         @Field("maps_absen") maps_absen: String,
+        @Field("bagian_shift") bagian_shift: Int,
         @Field("status_setting") status_setting: Int
     ): Observable<Wrapper<AbsensiResponse>>
 
@@ -53,16 +54,16 @@ interface EndPoint {
         @Field("nama_lengkap") nama_lengkap: String,
         @Field("username") username: String,
         @Field("password") password: String,
-        @Field("email") email: String
+        @Field("email") email: String,
+
 
 
     ): Observable<Wrapper<RegisterResponse>>
 
     @FormUrlEncoded
-    @PUT("register")
-    @Multipart
+    @POST("register")
     @Headers("X-Requested-With:XMLHttpRequest")
-    fun registerPut(
+    fun registerComplete(
         @Field("nama_lengkap") nama_lengkap: String,
         @Field("nip") nip: String,
         @Field("nik") nik: String,
@@ -82,13 +83,10 @@ interface EndPoint {
     ): Observable<Wrapper<RegisterResponse>>
 
 
-    @POST("image")
+
     @Multipart
-    fun registerImage(
-        @Part image: MultipartBody.Part,
-
-
-    ): Observable<Wrapper<Any>>
+    @POST("imgprofile")
+    fun registerImage(@Part profileImage: MultipartBody.Part): Observable<Wrapper<Any>>
 
 
 

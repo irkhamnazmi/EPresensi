@@ -19,6 +19,7 @@
         <item name="cuti">Cuti</item>
         <item name="dinas_luar_kota">Dinas Luar Kota</item>
         <item name="bebas_tugas">Bebas Tugas</item>
+        <item name="libur">Libur</item>
     </string-array>
     <string-array name="shift_option">
         <item name="">Pilih Shift</item>

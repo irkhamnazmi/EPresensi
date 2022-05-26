@@ -23,6 +23,9 @@ class AbsensiRequest (
     @SerializedName("maps_absen")
     var maps_absen : String,
     @Expose
+    @SerializedName("bagian_shift")
+    var bagian_shift : Int,
+    @Expose
     @SerializedName("status_setting")
     var status_setting : Int
 

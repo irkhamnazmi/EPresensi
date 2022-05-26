@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
@@ -24,7 +25,10 @@ import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.rsudbrebes.epresensi.BuildConfig
 import com.rsudbrebes.epresensi.EPresensi
+import com.rsudbrebes.epresensi.R
 import com.rsudbrebes.epresensi.databinding.FragmentSignCompleteBinding
+import com.rsudbrebes.epresensi.databinding.LoadingItemBinding
+import com.rsudbrebes.epresensi.databinding.ShowdialogCheckSuccessBinding
 import com.rsudbrebes.epresensi.model.request.AbsensiRequest
 import com.rsudbrebes.epresensi.model.request.CompleteRequest
 import com.rsudbrebes.epresensi.model.request.RegisterRequest
@@ -40,7 +44,7 @@ class SignCompleteFragment : Fragment(), SignCompleteContract.View {
 
     private lateinit var binding: FragmentSignCompleteBinding
     lateinit var presenter: SignCompletePresenter
-    private lateinit var alertDialog: AlertDialog
+    var progressDialog : Dialog? = null
 
     private val GALLERY_PERMISSION_CODE = 101
 
@@ -77,6 +81,8 @@ class SignCompleteFragment : Fragment(), SignCompleteContract.View {
     }
 
     private fun initView() {
+        initProgressDialog()
+
         view?.let { onBackPressed(it) }
         (activity as AuthActivity)?.dispatchAction("GONE")
         val user = EPresensi.getApp().getUser()
@@ -134,7 +140,7 @@ class SignCompleteFragment : Fragment(), SignCompleteContract.View {
             var edtUmur = binding.edtUmur
             var edtAlamat = binding.edtAlamat
             var edtEmail = binding.edtEmail
-            var edtJabatan = binding.edtInstansi
+            var edtJabatan = binding.edtJabatan
             var edtRuangan = binding.edtRuangan
             var edtInstansi = binding.edtInstansi
             var image = pick
@@ -193,6 +199,19 @@ class SignCompleteFragment : Fragment(), SignCompleteContract.View {
         }
 
 
+    }
+
+    private fun initProgressDialog() {
+        progressDialog = context?.let { Dialog(it) }
+        val inflater: LayoutInflater = this.layoutInflater
+        val bind = LoadingItemBinding.inflate(inflater)
+
+        progressDialog?.let {
+            it.setContentView(bind.root)
+            it.setCancelable(false)
+            it.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        }
     }
 
 
@@ -295,7 +314,8 @@ class SignCompleteFragment : Fragment(), SignCompleteContract.View {
 //        }
 
     override fun onSubmitSuccess(registerResponse: RegisterResponse) {
-       presenter.imageUpload(pick!!)
+//       presenter.imageUpload(pick!!)
+        Toast.makeText(context, registerResponse.toString(), Toast.LENGTH_SHORT).show()
     }
 
     override fun onSubmitFailed(message: String) {
@@ -303,15 +323,16 @@ class SignCompleteFragment : Fragment(), SignCompleteContract.View {
     }
 
     override fun onUploadCondition(message: String) {
-        view?.let { backAction(it) }
+
+      if(message == "Success")   view?.let { backAction(it) } else message
     }
 
     override fun showLoading() {
-
+        progressDialog?.show()
     }
 
     override fun dismissLoading() {
-
+        progressDialog?.dismiss()
     }
 
 

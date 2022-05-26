@@ -1,5 +1,6 @@
 package com.rsudbrebes.epresensi.ui.auth.signcomplete
 
+import android.app.Dialog
 import android.net.Uri
 import android.view.View
 import com.rsudbrebes.epresensi.model.request.CompleteRequest
@@ -22,7 +23,8 @@ class SignCompletePresenter(private val view: SignCompleteContract.View) :
     }
 
     override fun submitComplete(completeRequest: CompleteRequest) {
-        val disposable = HttpClient.getInstance().getApi()!!.registerPut(
+        view.showLoading()
+        val disposable = HttpClient.getInstance().getApi()!!.registerComplete(
             completeRequest.nama_lengkap,
             completeRequest.nip,
             completeRequest.nik,
@@ -44,7 +46,7 @@ class SignCompletePresenter(private val view: SignCompleteContract.View) :
             .subscribe(
                 {
 
-
+                    view.dismissLoading()
                     if (it.meta?.status.equals("success", true)) {
                         it.data?.let { it1 -> view.onSubmitSuccess(it1) }
                     } else {
@@ -52,18 +54,20 @@ class SignCompletePresenter(private val view: SignCompleteContract.View) :
                     }
                 },
                 {
+                    view.dismissLoading()
                     view.onSubmitFailed(it.message.toString())
                 }
             )
         mCompositeDisposable!!.add(disposable)
     }
 
-    override fun imageUpload(image: Uri) {
-        var imgFotoFile = File(image.path)
+    override fun imageUpload(filePath: Uri) {
+        view.showLoading()
+        var imgFotoFile = File(filePath.path)
         var imgFotoRequestBody =
             RequestBody.create(MediaType.parse("multipart/form-data"), imgFotoFile)
         var imgFotoParms =
-            MultipartBody.Part.createFormData("file", imgFotoFile.name, imgFotoRequestBody)
+            MultipartBody.Part.createFormData("foto_pegawai", imgFotoFile.name, imgFotoRequestBody)
         val disposable = HttpClient.getInstance().getApi()!!.registerImage(
             imgFotoParms
         )
@@ -72,15 +76,16 @@ class SignCompletePresenter(private val view: SignCompleteContract.View) :
             .subscribe(
                 {
 
-
+                    view.dismissLoading()
                     if (it.meta?.status.equals("success", true)) {
-                        view.onSubmitFailed("Sukses")
+                        view.onUploadCondition("Success")
                     } else {
-                        view.onSubmitFailed("Gagal")
+                        view.onUploadCondition("Failed")
                     }
                 },
                 {
-                    view.onSubmitFailed(it.message.toString())
+                    view.dismissLoading()
+                    view.onUploadCondition(it.message.toString())
                 }
             )
         mCompositeDisposable!!.add(disposable)

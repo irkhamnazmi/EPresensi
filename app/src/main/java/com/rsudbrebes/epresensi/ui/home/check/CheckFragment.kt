@@ -407,6 +407,7 @@ class CheckFragment : Fragment(), CheckContract.View {
                 keterangan,
                 binding.edtAlasan.text.toString(),
                 location,
+                userResponse.bagian_shift,
                 1
             )
 

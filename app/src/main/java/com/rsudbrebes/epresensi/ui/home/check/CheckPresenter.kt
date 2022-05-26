@@ -2,20 +2,13 @@ package com.rsudbrebes.epresensi.ui.home.check
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.DialogInterface
-import android.graphics.Color
-import android.hardware.biometrics.BiometricPrompt
 import android.widget.ArrayAdapter
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.rsudbrebes.epresensi.R
 import com.rsudbrebes.epresensi.model.request.AbsensiRequest
 import com.rsudbrebes.epresensi.network.HttpClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import java.math.MathContext
-import java.math.RoundingMode
-import java.text.DecimalFormat
 
 class CheckPresenter (private val view: CheckContract.View) : CheckContract.Presenter{
     private val mCompositeDisposable : CompositeDisposable?
@@ -43,6 +36,7 @@ class CheckPresenter (private val view: CheckContract.View) : CheckContract.Pres
             absensiRequest.ket_absen,
             absensiRequest.alasan,
             absensiRequest.maps_absen,
+            absensiRequest.bagian_shift,
             absensiRequest.status_setting
             )
             .subscribeOn(Schedulers.io())

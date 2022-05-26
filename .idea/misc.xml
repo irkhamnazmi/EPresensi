@@ -20,11 +20,11 @@
         <entry key="app/src/main/res/drawable/ic_arrow_right.xml" value="0.215625" />
         <entry key="app/src/main/res/drawable/ic_logo.xml" value="0.37395833333333334" />
         <entry key="app/src/main/res/drawable/spinner_style.xml" value="0.238" />
-        <entry key="app/src/main/res/layout/activity_auth.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/activity_auth.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.25487256371814093" />
         <entry key="app/src/main/res/layout/activity_splash_secreen.xml" value="0.296195652173913" />
-        <entry key="app/src/main/res/layout/fragment_check.xml" value="0.8919270833333334" />
+        <entry key="app/src/main/res/layout/fragment_check.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_check_in.xml" value="0.3578125" />
         <entry key="app/src/main/res/layout/fragment_check_success.xml" value="0.18933333333333333" />
         <entry key="app/src/main/res/layout/fragment_sign_complete.xml" value="0.33" />
@@ -35,6 +35,7 @@
         <entry key="app/src/main/res/layout/layout_footer_copyright.xml" value="0.15" />
         <entry key="app/src/main/res/layout/layout_header_auth.xml" value="0.9" />
         <entry key="app/src/main/res/layout/layout_toolbar.xml" value="0.3578125" />
+        <entry key="app/src/main/res/layout/loading_item.xml" value="0.51125" />
         <entry key="app/src/main/res/layout/showdialog_check_success.xml" value="0.6451104100946372" />
         <entry key="app/src/main/res/layout/showdialog_register.xml" value="0.3767605633802817" />
         <entry key="app/src/main/res/layout/showdialog_webview.xml" value="0.25" />
