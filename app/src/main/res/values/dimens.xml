@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- activity_auth -->
+    <dimen name="auth_include_header_mb">28dp</dimen>
+    <dimen name="auth_include_footer_mt">179dp</dimen>
+
+    <!-- activity_main -->
+
+    <!-- fragment_check -->
+    <dimen name="check_imageview_width">28dp</dimen>
+    <dimen name="check_image_view_height">179dp</dimen>
+
+
+</resources>
