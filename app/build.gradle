@@ -39,8 +39,7 @@ android {
     productFlavors{
         dev {
             applicationId = "com.rsudbrebes.epresensi.dev"
-//            buildConfigField ("String", "BASE_URL","\"https://sub.e-absenrsudbrebesonline.my.id/public/\"")
-            buildConfigField ("String", "BASE_URL","\"https://e-absenrsudbrebesonline.my.id/public/\"")
+            buildConfigField ("String", "BASE_URL","\"https://sub.e-absenrsudbrebesonline.my.id/public/\"")
         }
     }
 

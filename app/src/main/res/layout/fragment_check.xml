@@ -65,14 +65,7 @@
             android:textAppearance="@style/userlogin"
             android:textColor="@color/black" />
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/spKetAbsen"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginHorizontal="16dp"
-            android:background="@drawable/spinner_style"
-            android:minHeight="48dp" />
+
 
 
         <LinearLayout
@@ -80,17 +73,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:padding="16dp"
+            android:paddingHorizontal="48dp"
             android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spKetAbsen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/spinner_style"
+                android:minHeight="48dp" />
 
             <Button
                 android:id="@+id/btnCheckOut"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:background="@drawable/btn_from_uncheck_style"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="CHECK OUT"
+                android:layout_marginTop="24dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:textAppearance="@style/selamat_datang"
 
@@ -98,10 +99,10 @@
 
             <Button
                 android:id="@+id/btnCheckIn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/btn_from_uncheck_style"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="CHECK IN"
@@ -115,7 +116,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:padding="16dp"
+            android:paddingHorizontal="48dp"
             android:orientation="vertical">
 
             <EditText
@@ -138,7 +139,7 @@
 
             <Button
                 android:id="@+id/btnSubmit"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"

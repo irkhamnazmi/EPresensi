@@ -14,14 +14,20 @@ class AbsensiRequest (
     @SerializedName("kode_pegawai")
     var kode_pegawai : String,
     @Expose
-    @SerializedName("keterangan_absen")
-    var keterangan_absen : String,
+    @SerializedName("ket_absen")
+    var ket_absen : String,
+    @Expose
+    @SerializedName("alasan")
+    var alasan : String,
     @Expose
     @SerializedName("alasan")
     var alasan : String,
     @Expose
     @SerializedName("maps_absen")
     var maps_absen : String,
+    @Expose
+    @SerializedName("bagian_shift")
+    var bagian_shift : Int,
     @Expose
     @SerializedName("status_setting")
     var status_setting : Int

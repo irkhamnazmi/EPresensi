@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class User(
     @Expose
     @SerializedName("bagian_shift")
-    val bagian_shift: String,
+    val bagian_shift: Int,
     @Expose
     @SerializedName("date_created")
     val date_created: String,
@@ -67,5 +67,6 @@ data class User(
     @Expose
     @SerializedName("username")
     val username: String
+
 
 )
