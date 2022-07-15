@@ -65,7 +65,13 @@
             android:textAppearance="@style/userlogin"
             android:textColor="@color/black" />
 
-
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spKetAbsen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="48dp"
+            android:background="@drawable/spinner_style"
+            android:minHeight="48dp" />
 
 
         <LinearLayout
@@ -73,26 +79,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:paddingHorizontal="48dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingHorizontal="48dp">
 
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/spKetAbsen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/spinner_style"
-                android:minHeight="48dp" />
 
             <Button
                 android:id="@+id/btnCheckOut"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/btn_from_uncheck_style"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="CHECK OUT"
-                android:layout_marginTop="24dp"
                 android:foreground="?android:attr/selectableItemBackground"
+                android:text="ABSEN PULANG"
                 android:textAppearance="@style/selamat_datang"
 
                 />
@@ -105,8 +105,8 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/btn_from_uncheck_style"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="CHECK IN"
                 android:foreground="?android:attr/selectableItemBackground"
+                android:text="ABSEN MASUK"
                 android:textAppearance="@style/selamat_datang" />
 
         </LinearLayout>
@@ -116,22 +116,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:paddingHorizontal="48dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingHorizontal="48dp">
 
             <EditText
                 android:id="@+id/edtAlasan"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:backgroundTint="@color/white"
                 android:background="@color/white"
+                android:backgroundTint="@color/white"
                 android:fontFamily="@font/poppins"
                 android:gravity="top|left"
+                android:hint="Masukkan Keterangan"
                 android:inputType="textMultiLine"
                 android:lines="6"
-                android:hint="Masukkan Keterangan"
-                android:padding="16dp"
                 android:overScrollMode="always"
+                android:padding="16dp"
                 android:scrollbarStyle="insideInset"
                 android:scrollbars="vertical"
                 android:scrollHorizontally="false"
@@ -142,13 +142,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/btn_from_checkin_style"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="Konfirmasi"
-                android:textColor="@color/white"
                 android:foreground="?android:attr/selectableItemBackground"
+                android:text="Konfirmasi"
                 android:textAppearance="@style/selamat_datang"
+                android:textColor="@color/white"
 
                 />
 

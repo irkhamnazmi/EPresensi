@@ -77,6 +77,7 @@
         android:layout_marginTop="10dp"
         android:layout_below="@id/cv_signin"
         android:gravity="center"
+        android:visibility="gone"
         android:padding="10dp">
 
 
@@ -96,8 +97,8 @@
             android:id="@+id/tvRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/tvKetDua"
             android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/tvKetDua"
             android:fontFamily="@font/poppins_medium"
             android:text="Register "
             android:textAppearance="@style/daftar"

@@ -20,9 +20,6 @@ class AbsensiRequest (
     @SerializedName("alasan")
     var alasan : String,
     @Expose
-    @SerializedName("alasan")
-    var alasan : String,
-    @Expose
     @SerializedName("maps_absen")
     var maps_absen : String,
     @Expose

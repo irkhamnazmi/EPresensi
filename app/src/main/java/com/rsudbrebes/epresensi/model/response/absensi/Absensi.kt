@@ -8,8 +8,8 @@ data class Absensi(
     @SerializedName("jam_masuk")
     val jam_masuk: String,
     @Expose
-    @SerializedName("keterangan_absen")
-    val keterangan_absen: String,
+    @SerializedName("ket_absen")
+    val ket_absen: String,
     @Expose
     @SerializedName("alasan")
     val alasan: String,

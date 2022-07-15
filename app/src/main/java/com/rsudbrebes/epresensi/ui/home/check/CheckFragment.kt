@@ -275,6 +275,7 @@ class CheckFragment : Fragment(), CheckContract.View {
         binding.btnCheckOut.setBackgroundResource(R.drawable.btn_from_uncheck_style)
         binding.btnSubmit.setBackgroundResource(R.drawable.btn_from_uncheck_style)
         binding.btnCheckIn.setTextAppearance(R.style.selamat_datang)
+        Log.d(TAG, "onCheckAbsenSuccess: Sudah Absen")
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -291,7 +292,7 @@ class CheckFragment : Fragment(), CheckContract.View {
 //                fusedLocationClient =
 //                    LocationServices.getFusedLocationProviderClient(requireActivity())
 //                getCurrentLocation()
-                absenStatus = "CHECK OUT"
+                absenStatus = "Absen Pulang"
 //                checkBiometricSupport()
 //                val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(activity)
 //                    .setTitle("Presensi dulu")
@@ -320,7 +321,7 @@ class CheckFragment : Fragment(), CheckContract.View {
 //                fusedLocationClient =
 //                    LocationServices.getFusedLocationProviderClient(requireActivity())
 //                getCurrentLocation()
-                absenStatus = "CHECK IN"
+                absenStatus = "Absen Masuk"
 //                checkBiometricSupport()
 //                val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(activity)
 //                    .setTitle("Presensi dulu")
@@ -348,6 +349,7 @@ class CheckFragment : Fragment(), CheckContract.View {
                 postData()
             }
         }
+
 
     }
 
@@ -416,11 +418,13 @@ class CheckFragment : Fragment(), CheckContract.View {
     }
 
     private fun statusKet() {
-        if (keterangan == "" || keterangan == "Hadir") {
+        if (keterangan == "" || keterangan == "Hadir" ||  keterangan == "Lembur") {
             binding.lnCheck.visibility = View.VISIBLE
             binding.lnFormAlasan.visibility = View.GONE
             binding.edtAlasan.setText("")
-        } else {
+        }
+
+        else {
             binding.lnCheck.visibility = View.GONE
             binding.lnFormAlasan.visibility = View.VISIBLE
             binding.edtAlasan.setText("")
@@ -446,7 +450,7 @@ class CheckFragment : Fragment(), CheckContract.View {
             bind.tvSuccess.text = "Gagal"
         }
         var color = ""
-        color = if(status == "CHECK IN") "#00fc28" else "#f44336"
+        color = if(status == "Absen Masuk") "#00fc28" else "#f44336"
         bind.tvCheck.setTextColor(Color.parseColor(color))
         bind.tvCheck.text = status
         Handler().postDelayed({

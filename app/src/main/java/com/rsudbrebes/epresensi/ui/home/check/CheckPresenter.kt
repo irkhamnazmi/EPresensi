@@ -71,7 +71,7 @@ class CheckPresenter (private val view: CheckContract.View) : CheckContract.Pres
                     }
                 },
                 {
-//                    view.onCheckAbsenFailed(it.message.toString())
+                    view.onCheckAbsenFailed(it.message.toString())
                 }
             )
         mCompositeDisposable!!.add(disposable)

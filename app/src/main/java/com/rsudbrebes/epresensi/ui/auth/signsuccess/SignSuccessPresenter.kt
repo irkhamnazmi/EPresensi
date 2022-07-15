@@ -22,7 +22,7 @@ class SignSuccessPresenter (private val view: SignSuccessContract.View ) : SignS
             .subscribe(
                 {
 
-                    if (it.meta?.status.equals("ready",true)){
+                    if (it.meta?.status.equals("available",true)){
                         it.data?.let { it1 -> view.onCheckSuccess(it1) }
                     }  else {
                         it.meta?.message?.let { it1 -> view.onCheckFailed(it1) }

@@ -24,9 +24,10 @@ interface EndPoint {
     fun absenPost(
         @Field("nama_pegawai") nama_pegawai: String,
         @Field("kode_pegawai") kode_pegawai: String,
-        @Field("keterangan_absen") keterangan_absen: String,
+        @Field("ket_absen") ket_absen: String,
         @Field("alasan") alasan: String,
         @Field("maps_absen") maps_absen: String,
+        @Field("bagian_shift") bagian_shift: Int,
         @Field("status_setting") status_setting: Int
     ): Observable<Wrapper<AbsensiResponse>>
 
