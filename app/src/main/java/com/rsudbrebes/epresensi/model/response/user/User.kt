@@ -29,6 +29,9 @@ data class User(
     @SerializedName("jabatan")
     val jabatan: String,
     @Expose
+    @SerializedName("ruangan")
+    val ruangan: String,
+    @Expose
     @SerializedName("jenis_kelamin")
     val jenis_kelamin: String,
     @Expose

@@ -24,7 +24,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.633672525439408" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.25487256371814093" />
         <entry key="app/src/main/res/layout/activity_splash_secreen.xml" value="0.296195652173913" />
-        <entry key="app/src/main/res/layout/fragment_check.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_check.xml" value="0.225" />
         <entry key="app/src/main/res/layout/fragment_check_in.xml" value="0.3578125" />
         <entry key="app/src/main/res/layout/fragment_check_success.xml" value="0.18933333333333333" />
         <entry key="app/src/main/res/layout/fragment_sign_complete.xml" value="0.33" />

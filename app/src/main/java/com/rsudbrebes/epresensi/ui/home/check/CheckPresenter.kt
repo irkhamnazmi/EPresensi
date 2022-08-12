@@ -36,6 +36,7 @@ class CheckPresenter (private val view: CheckContract.View) : CheckContract.Pres
             absensiRequest.ket_absen,
             absensiRequest.alasan,
             absensiRequest.maps_absen,
+            absensiRequest.ruangan,
             absensiRequest.bagian_shift,
             absensiRequest.status_setting
             )

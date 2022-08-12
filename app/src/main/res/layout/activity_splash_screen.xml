@@ -17,16 +17,15 @@
         android:layout_above="@id/included_footer">
 
 
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="115dp"
-        android:layout_height="115dp"
-
-        android:src="@drawable/logors"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"/>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="150dp"
+            android:layout_height="250dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logors" />
 
         <TextView
             android:id="@+id/absensi"
@@ -40,7 +39,7 @@
             android:gravity="center_horizontal|top"
             android:text="@string/absensi"
             android:textAlignment="center"
-            android:textAppearance="@style/absensi" />
+            android:textAppearance="@style/absensi_splash" />
 
         <TextView
             android:id="@+id/online"
@@ -52,20 +51,20 @@
             android:fontFamily="@font/poppins_bold"
             android:gravity="center_horizontal|top"
             android:text="@string/online"
-            android:textAppearance="@style/online" />
+            android:textAppearance="@style/online_splash" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_bold"
-        android:gravity="center_horizontal|top"
-        android:text="RSUD BREBES"
-        android:textAlignment="center"
-        android:textAppearance="@style/absensi"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/online"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/online"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center_horizontal|top"
+            android:text="RSUD BREBES"
+            android:textAlignment="center"
+            android:textAppearance="@style/absensi_splash" />
 
     </RelativeLayout>
 

@@ -23,6 +23,9 @@ data class Absensi(
     @SerializedName("maps_absen")
     val maps_absen: String,
     @Expose
+    @SerializedName("ruangan")
+    val ruangan: String,
+    @Expose
     @SerializedName("nama_pegawai")
     val nama_pegawai: String,
     @Expose

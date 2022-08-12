@@ -27,6 +27,7 @@ interface EndPoint {
         @Field("ket_absen") ket_absen: String,
         @Field("alasan") alasan: String,
         @Field("maps_absen") maps_absen: String,
+        @Field("ruangan") ruangan: String,
         @Field("bagian_shift") bagian_shift: Int,
         @Field("status_setting") status_setting: Int
     ): Observable<Wrapper<AbsensiResponse>>

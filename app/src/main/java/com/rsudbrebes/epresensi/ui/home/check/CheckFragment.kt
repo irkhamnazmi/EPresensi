@@ -40,6 +40,7 @@ import com.rsudbrebes.epresensi.databinding.ShowdialogCheckSuccessBinding
 import com.rsudbrebes.epresensi.model.request.AbsensiRequest
 import com.rsudbrebes.epresensi.model.response.absensi.AbsensiResponse
 import com.rsudbrebes.epresensi.model.response.user.User
+import com.rsudbrebes.epresensi.ui.MainActivity
 import com.rsudbrebes.epresensi.ui.auth.AuthActivity
 import java.text.SimpleDateFormat
 import java.util.*
@@ -275,6 +276,7 @@ class CheckFragment : Fragment(), CheckContract.View {
         binding.btnCheckOut.setBackgroundResource(R.drawable.btn_from_uncheck_style)
         binding.btnSubmit.setBackgroundResource(R.drawable.btn_from_uncheck_style)
         binding.btnCheckIn.setTextAppearance(R.style.selamat_datang)
+        binding.btnCheckOut.setTextAppearance(R.style.selamat_datang)
         Log.d(TAG, "onCheckAbsenSuccess: Sudah Absen")
     }
 
@@ -285,6 +287,7 @@ class CheckFragment : Fragment(), CheckContract.View {
 //            binding.tvResult.text = message
 
             binding.btnCheckIn.setBackgroundResource(R.drawable.btn_from_uncheck_style)
+            binding.btnCheckIn.isClickable = false
             binding.btnCheckIn.setTextAppearance(R.style.selamat_datang)
             binding.btnCheckOut.setBackgroundResource(R.drawable.btn_from_checkout_style)
             binding.btnCheckOut.setTextColor(Color.parseColor("#FFFFFF"))
@@ -315,8 +318,13 @@ class CheckFragment : Fragment(), CheckContract.View {
             }
         } else if (message == "Belum Absen") {
 //            binding.tvResult.text = message
+            binding.btnCheckOut.setBackgroundResource(R.drawable.btn_from_uncheck_style)
+            binding.btnCheckOut.isClickable = false
+//            binding.btnCheckOut.setTextAppearance(R.style.selamat_datang)
             binding.btnCheckIn.setBackgroundResource(R.drawable.btn_from_checkin_style)
-            binding.btnCheckIn.setTextAppearance(R.style.login)
+            binding.btnCheckIn.setTextColor(Color.parseColor("#FFFFFF"))
+
+
             binding.btnCheckIn.setOnClickListener {
 //                fusedLocationClient =
 //                    LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -409,6 +417,7 @@ class CheckFragment : Fragment(), CheckContract.View {
                 keterangan,
                 binding.edtAlasan.text.toString(),
                 location,
+                userResponse.ruangan,
                 userResponse.bagian_shift,
                 1
             )
@@ -455,8 +464,7 @@ class CheckFragment : Fragment(), CheckContract.View {
         bind.tvCheck.text = status
         Handler().postDelayed({
             alertDialog.dismiss()
-            initPresenter()
-            initView()
+            initRefresh()
         }, 2000)
 
         alertDialog = dialogBuilder.create();
@@ -465,6 +473,10 @@ class CheckFragment : Fragment(), CheckContract.View {
             R.style.Animation_Design_BottomSheetDialog
 //        alertDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent);
         alertDialog.show()
+    }
+
+    private fun initRefresh() {
+        (activity as MainActivity)?.dispatchAction(1)
     }
 
 

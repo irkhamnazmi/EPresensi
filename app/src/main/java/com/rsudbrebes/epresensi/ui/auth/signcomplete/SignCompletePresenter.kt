@@ -9,6 +9,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
@@ -61,7 +62,7 @@ class SignCompletePresenter(private val view: SignCompleteContract.View) :
     override fun imageUpload(image: Uri) {
         var imgFotoFile = File(image.path)
         var imgFotoRequestBody =
-            RequestBody.create(MediaType.parse("multipart/form-data"), imgFotoFile)
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), imgFotoFile)
         var imgFotoParms =
             MultipartBody.Part.createFormData("file", imgFotoFile.name, imgFotoRequestBody)
         val disposable = HttpClient.getInstance().getApi()!!.registerImage(

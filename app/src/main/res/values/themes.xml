@@ -45,12 +45,39 @@
         </item>
 
     </style>
+    <style name="absensi_splash">
+
+        <item name="android:textSize">
+            24sp
+        </item>
+
+
+        <item name="android:textColor">
+            #8CE7E7
+        </item>
+
+    </style>
 
 
     <style name="online">
 
         <item name="android:textSize">
             10.22sp
+        </item>
+
+        <item name="android:letterSpacing">
+            0.57
+        </item>
+
+        <item name="android:textColor">
+            #AAAAAA
+        </item>
+
+    </style>
+    <style name="online_splash">
+
+        <item name="android:textSize">
+            20.22sp
         </item>
 
         <item name="android:letterSpacing">

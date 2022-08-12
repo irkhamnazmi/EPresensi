@@ -49,4 +49,12 @@ class EPresensi : MultiDexApplication() {
         return getPreference().getString("PREFERENCE_ACTIVE", null)
     }
 
+    fun setNotif(notif: String) {
+        getPreference().edit().putString("PREFERENCE_NOTIF", notif).apply()
+    }
+
+    fun getNotif() : String?{
+        return getPreference().getString("PREFERENCE_NOTIF", null)
+    }
+
 }
