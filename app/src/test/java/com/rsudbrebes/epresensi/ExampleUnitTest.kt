@@ -44,9 +44,16 @@ class ExampleUnitTest {
     fun delayTest(){
 //        println("Jadi....sdsd")
 //        Thread.sleep(10000)
-//        println("Jadi....")
-        for (i in 1..300) {
-            println("WKWK")
+
+        for (i in 1..4) {
+            println("Jadi....")
+            when(i){
+                1->println("+")
+                2->println("++")
+                3->println("+++")
+                4->println("++++")
+
+            }
             Thread.sleep(3000)
         }
     }

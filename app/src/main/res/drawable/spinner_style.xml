@@ -14,7 +14,7 @@
                 </shape>
             </item>
 
-            <item android:drawable="@drawable/ic_dropdown" android:gravity="center_vertical|right" />
+<!--            <item android:drawable="@drawable/ic_dropdown" android:gravity="center_vertical|right" />-->
         </layer-list>
     </item>
 </selector>

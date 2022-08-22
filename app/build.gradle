@@ -9,14 +9,14 @@ plugins {
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.rsudbrebes.epresensi"
         minSdk 21
         targetSdk 32
         versionCode 1
-        versionName "1.8.2"
+        versionName "1.8.22"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         flavorDimensions "dev"
@@ -37,10 +37,12 @@ android {
         jvmTarget = '1.8'
     }
 
-    productFlavors{
+    productFlavors {
         dev {
-            applicationId = "com.rsudbrebes.epresensi.dev"
-            buildConfigField ("String", "BASE_URL","\"https://sub.e-absenrsudbrebesonline.my.id/public/\"")
+            applicationId = "com.rsudbrebes.absensi.online"
+            buildConfigField ("String", "BASE_URL","\"https://e-absenrsudbrebesonline.my.id/public/\"")
+//            applicationId = "com.rsudbrebes.absensi.online.sub"
+//            buildConfigField("String", "BASE_URL", "\"https://sub.e-absenrsudbrebesonline.my.id/public/\"")
         }
     }
 
@@ -86,12 +88,8 @@ dependencies {
     def biometricLibraryVersion = '1.1.0'
     implementation "androidx.biometric:biometric:$biometricLibraryVersion"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-    api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
-
-
-
-
 
 
     testImplementation 'junit:junit:4.+'
@@ -99,6 +97,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
 }
 repositories {
 //    mavenCentral()

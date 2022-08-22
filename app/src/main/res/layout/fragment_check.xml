@@ -22,7 +22,8 @@
             android:layout_width="163dp"
             android:layout_height="150dp"
             android:src="@drawable/profile_dummy"
-            tools:src="@drawable/profile_dummy" />
+            tools:src="@drawable/profile_dummy"
+            android:contentDescription="TODO" />
 
         <TextView
             android:id="@+id/textView"
@@ -65,13 +66,42 @@
             android:textColor="@color/black" />
 
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/spKetAbsen"
+        <RelativeLayout
+            android:id="@+id/spinnerLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="48dp"
+            android:gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_weight=".28"
+            android:orientation="horizontal"
             android:background="@drawable/spinner_style"
-            android:minHeight="48dp" />
+            android:layout_marginHorizontal="48dp">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spKetAbsen"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:spinnerMode="dropdown"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_dropdown" />
+
+        </RelativeLayout>
+
 
 
         <LinearLayout
