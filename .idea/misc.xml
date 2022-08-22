@@ -20,6 +20,7 @@
         <entry key="app/src/main/res/drawable/edt_form_style_readonly.xml" value="0.238" />
         <entry key="app/src/main/res/drawable/ic_arrow_right.xml" value="0.215625" />
         <entry key="app/src/main/res/drawable/ic_logo.xml" value="0.37395833333333334" />
+        <entry key="app/src/main/res/drawable/ic_logors_svg.xml" value="0.188" />
         <entry key="app/src/main/res/drawable/spinner_style-v22.xml" value="0.122" />
         <entry key="app/src/main/res/drawable/spinner_style.xml" value="0.238" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.33" />
@@ -45,6 +46,7 @@
         <entry key="app/src/main/res/mipmap-anydpi-v22/ic_launcher_round.xml" value="0.122" />
         <entry key="app/src/main/res/mipmap-anydpi-v24/ic_launcher.xml" value="0.122" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.14814814814814814" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.188" />
         <entry key="app/src/main/res/xml/provider_paths.xml" value="0.3567708333333333" />
       </map>
     </option>
