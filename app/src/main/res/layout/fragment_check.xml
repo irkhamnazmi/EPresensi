@@ -102,6 +102,16 @@
 
         </RelativeLayout>
 
+                <TextView
+                    android:id="@+id/tvResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:fontFamily="@font/poppins"
+                    />
+
 
 
         <LinearLayout
@@ -140,6 +150,8 @@
                 android:textAppearance="@style/selamat_datang" />
 
         </LinearLayout>
+
+
 
         <LinearLayout
             android:id="@+id/lnFormAlasan"
@@ -205,15 +217,7 @@
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <!--        <TextView-->
-    <!--            android:id="@+id/tvResult"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginTop="20dp"-->
-    <!--            android:text="Tunggu sebentar..."-->
-    <!--            android:textAlignment="center"-->
-    <!--            android:fontFamily="@font/poppins"-->
-    <!--            />-->
+
 
 
 
