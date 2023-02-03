@@ -1,11 +1,14 @@
 package com.rsudbrebes.epresensi.utils
 
+import android.Manifest
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Handler
 import android.util.Log
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.OneTimeWorkRequestBuilder
@@ -49,12 +52,17 @@ class AlarmReceiver : BroadcastReceiver() {
 
 
 
-            Log.d("id baru", "onReceive: masuk ")
-            EPresensi.getApp().setNotif("running")
-            builder?.let { notificationManager?.notify(1, it.build()) }
-//            EPresensi.getApp().getNotifId()
-//                ?.let { notificationManager?.deleteNotificationChannel(it) }
-//            Log.d("id lama", "onReceive: dihapus ")
+            Log.d("", "onReceive: masuk ")
+//            EPresensi.getApp().setNotif("running")
+            if (ActivityCompat.checkSelfPermission(
+                    context!!,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+
+                return
+            }
+            builder?.let {notificationManager?.notify(1, it.build()) }
 
 
 

@@ -50,29 +50,12 @@ class WorkerService(context: Context, workerParameter: WorkerParameters) :
                         "Pastikan koneksi internet terhubung"
                     )
 
-                    if(calendar.before(Calendar.getInstance())){
-                        calendar.add(Calendar.DATE,1)
-                    }
-//                    alarmManager.set(
-//                        AlarmManager.RTC_WAKEUP, calendar.timeInMillis,
-//                        pendingIntent
-//                    )
-                    alarmManager.setRepeating(
-                        AlarmManager.RTC_WAKEUP, calendar.timeInMillis,
-                        AlarmManager.INTERVAL_DAY, pendingIntent
-                    )
 
                 }
                 2 -> {
                     getTime(5, 0)
                     setAlarm("Mulai Absen Masuk Shift Pagi", "Cepat absen sebelum Pukul 7.30 WIB")
-                    if(calendar.before(Calendar.getInstance())){
-                        calendar.add(Calendar.DATE,1)
-                    }
-                    alarmManager.setRepeating(
-                        AlarmManager.RTC_WAKEUP, calendar.timeInMillis,
-                        AlarmManager.INTERVAL_DAY, pendingIntent
-                    )
+
 
                 }
                 3 -> {
@@ -81,24 +64,16 @@ class WorkerService(context: Context, workerParameter: WorkerParameters) :
                         "Sebentar lagi Absen Pulang Shift Malam",
                         "Pastikan koneksi internet terhubung"
                     )
-                    if(calendar.before(Calendar.getInstance())){
-                        calendar.add(Calendar.DATE,1)
-                    }
-                    alarmManager.setRepeating(
-                        AlarmManager.RTC_WAKEUP, calendar.timeInMillis,
-                        AlarmManager.INTERVAL_DAY, pendingIntent
-                    )
+
+
                 }
                 4 -> {
                     getTime(7, 20)
                     setAlarm("Mulai Absen Pulang Shift Malam", "Cepat absen sebelum Pukul 7.30 WIB")
-                    if(calendar.before(Calendar.getInstance())){
-                        calendar.add(Calendar.DATE,1)
+                    if (calendar.before(Calendar.getInstance())) {
+                        calendar.add(Calendar.DATE, 1)
                     }
-                    alarmManager.setRepeating(
-                        AlarmManager.RTC_WAKEUP, calendar.timeInMillis,
-                        AlarmManager.INTERVAL_DAY, pendingIntent
-                    )
+
                 }
                 5 -> {
                     getTime(13, 50)
@@ -106,13 +81,7 @@ class WorkerService(context: Context, workerParameter: WorkerParameters) :
                         "Sebentar lagi Absen Masuk Shift Siang dan Pulang Shift Pagi",
                         "Pastikan koneksi internet terhubung"
                     )
-                    if(calendar.before(Calendar.getInstance())){
-                        calendar.add(Calendar.DATE,1)
-                    }
-                    alarmManager.setRepeating(
-                        AlarmManager.RTC_WAKEUP, calendar.timeInMillis,
-                        AlarmManager.INTERVAL_DAY, pendingIntent
-                    )
+
                 }
                 6 -> {
                     getTime(14, 0)
@@ -120,13 +89,7 @@ class WorkerService(context: Context, workerParameter: WorkerParameters) :
                         "Mulai Absen Masuk Shift Siang dan Pulang Shift Pagi",
                         "Cepat absen sebelum Pukul 14.30 WIB"
                     )
-                    if(calendar.before(Calendar.getInstance())){
-                        calendar.add(Calendar.DATE,1)
-                    }
-                    alarmManager.setRepeating(
-                        AlarmManager.RTC_WAKEUP, calendar.timeInMillis,
-                        AlarmManager.INTERVAL_DAY, pendingIntent
-                    )
+
                 }
                 7 -> {
                     getTime(20, 50)
@@ -134,13 +97,7 @@ class WorkerService(context: Context, workerParameter: WorkerParameters) :
                         "Sebentar lagi Absen Masuk Shift Malam dan Shift Siang",
                         "Pastikan koneksi internet terhubung"
                     )
-                    if(calendar.before(Calendar.getInstance())){
-                        calendar.add(Calendar.DATE,1)
-                    }
-                    alarmManager.setRepeating(
-                        AlarmManager.RTC_WAKEUP, calendar.timeInMillis,
-                        AlarmManager.INTERVAL_DAY, pendingIntent
-                    )
+
                 }
                 8 -> {
                     getTime(21, 0)
@@ -148,38 +105,37 @@ class WorkerService(context: Context, workerParameter: WorkerParameters) :
                         "Mulai Absen Masuk Shift Malam dan Pulang Shift Siang",
                         "Cepat absen sebelum pukul 21.30 WIB"
                     )
-                    if(calendar.before(Calendar.getInstance())){
-                        calendar.add(Calendar.DATE,1)
-                    }
-                    alarmManager.setRepeating(
-                        AlarmManager.RTC_WAKEUP, calendar.timeInMillis,
-                        AlarmManager.INTERVAL_DAY, pendingIntent
-                    )
+
                 }
 
             }
-            Thread.sleep(3000)
+
         }
 
     }
 
     private fun getTime(hour: Int, minute: Int): Calendar {
+
+
         calendar = Calendar.getInstance()
         calendar.set(Calendar.HOUR_OF_DAY, hour)
         calendar.set(Calendar.MINUTE, minute)
         calendar.set(Calendar.SECOND, 0)
         calendar.set(Calendar.MILLISECOND, 0)
 
-//        time = (calendar.getTimeInMillis() - (calendar.getTimeInMillis() % 60000));
-//        if (System.currentTimeMillis() > time) {
-//            // setting time as AM and PM
-//            time = time + (1000 * 60 * 60 * 24)
-//
-//        }
+
+
+        if (calendar.before(Calendar.getInstance())) {
+            calendar.add(Calendar.DATE, 1)
+        }
+
+
         return calendar
     }
 
-    private fun setAlarm(title: String, content: String): PendingIntent {
+    private fun setAlarm(title: String, content: String) {
+
+
         alarmManager =
             applicationContext.getSystemService(AppCompatActivity.ALARM_SERVICE) as AlarmManager
         val intent = Intent(applicationContext, AlarmReceiver::class.java)
@@ -192,7 +148,13 @@ class WorkerService(context: Context, workerParameter: WorkerParameters) :
             ContentValues.TAG,
             "Alarm is running ${calendar[Calendar.HOUR_OF_DAY]} : ${calendar[Calendar.MINUTE]}"
         )
-        return pendingIntent
+
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP, calendar.timeInMillis,
+            AlarmManager.INTERVAL_DAY, pendingIntent
+        )
+        Thread.sleep(3000)
+
     }
 
 

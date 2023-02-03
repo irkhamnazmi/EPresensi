@@ -31,6 +31,7 @@ import androidx.navigation.Navigation
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.gson.Gson
 import com.rsudbrebes.epresensi.BuildConfig.BASE_URL
 import com.rsudbrebes.epresensi.EPresensi
@@ -69,7 +70,6 @@ class CheckFragment : Fragment(), CheckContract.View {
     private lateinit var alertDialog: AlertDialog
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -96,8 +96,6 @@ class CheckFragment : Fragment(), CheckContract.View {
     }
 
 
-
-
     private fun initLogout() {
         binding.tvLogout.setOnClickListener {
             EPresensi.getApp().setUser("")
@@ -121,11 +119,14 @@ class CheckFragment : Fragment(), CheckContract.View {
         tvUsername.text = "Nama : ${userResponse.nama_lengkap}"
         tvNip.text = "NIP : ${userResponse.kode_pegawai}"
         tvJabatan.text = "Jabatan : ${userResponse.jabatan}"
-
+        fusedLocationClient =
+            LocationServices.getFusedLocationProviderClient(requireActivity())
         presenter.checkAbsen(userResponse.kode_pegawai)
 
         statusKet()
+
     }
+
 
 
     override fun onRequestPermissionsResult(
@@ -148,41 +149,42 @@ class CheckFragment : Fragment(), CheckContract.View {
         }
     }
 
-//    private fun getCurrentLocation() {
-//        // checking location permission
-//        if (ActivityCompat.checkSelfPermission(
-//                requireActivity(),
-//                Manifest.permission.ACCESS_FINE_LOCATION
-//            ) != PackageManager.PERMISSION_GRANTED
-//        ) {
-//
-//            // request permission
-//            ActivityCompat.requestPermissions(
-//                requireActivity(),
-//                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQ_CODE
-//            );
-//
-//            return
-//
-//        }
-//
-//        fusedLocationClient.lastLocation
-//            .addOnSuccessListener { location ->
-//                val latitude = location.latitude
-//                val longitude = location.longitude
-//                val latitudeTo = -6.874072867659325
-//                val longitudeTo = 109.04892526906285
-//
-////                presenter.locationDistance(latitude, longitude, latitudeTo, longitudeTo)
-//
-//            }
-//            .addOnFailureListener {
-//                Toast.makeText(
-//                    context, "Failed on getting current location",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//            }
-//    }
+    private fun getCurrentLocation() {
+         //checking location permission
+        if (ActivityCompat.checkSelfPermission(
+                requireActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            Toast.makeText(requireContext(), "Meminta izin lokasi", Toast.LENGTH_SHORT).show()
+            // request permission
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQ_CODE
+            );
+
+            return
+
+        }
+
+
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location ->
+                val latitude = location.latitude
+                val longitude = location.longitude
+                val latitudeTo = -6.874072867659325
+                val longitudeTo = 109.04892526906285
+
+                presenter.locationDistance(latitude, longitude, latitudeTo, longitudeTo)
+
+            }
+            .addOnFailureListener {
+                Toast.makeText(
+                    context, "Failed on getting current location",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+    }
 
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -239,18 +241,21 @@ class CheckFragment : Fragment(), CheckContract.View {
                 }
             }
 
-//    @RequiresApi(Build.VERSION_CODES.M)
-//    override fun onLongDistance(message: String) {
-////        binding.tvResult.text = message
-//        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-//    }
-//
-//    @RequiresApi(Build.VERSION_CODES.P)
-//    override fun onShortDistance(maps: String, message: String) {
-////        binding.tvResult.text = message
-//        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-//        location = maps
-//
+    @RequiresApi(Build.VERSION_CODES.M)
+    override fun onLongDistance(message: String) {
+//        binding.tvResult.text = message
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.P)
+    override fun onShortDistance(maps: String, message: String) {
+//        binding.tvResult.text = message
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        location = maps
+
+        postData()
 //        val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(activity)
 //            .setTitle("Presensi dulu")
 //            .setSubtitle("Dibutuhkan bukti hadir")
@@ -267,7 +272,7 @@ class CheckFragment : Fragment(), CheckContract.View {
 //            context!!.mainExecutor,
 //            authenticationCallback
 //        )
-//    }
+    }
 
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -292,10 +297,9 @@ class CheckFragment : Fragment(), CheckContract.View {
             binding.btnCheckOut.setBackgroundResource(R.drawable.btn_from_checkout_style)
             binding.btnCheckOut.setTextColor(Color.parseColor("#FFFFFF"))
             binding.btnCheckOut.setOnClickListener {
-//                fusedLocationClient =
-//                    LocationServices.getFusedLocationProviderClient(requireActivity())
-//                getCurrentLocation()
+
                 absenStatus = "Absen Pulang"
+                getCurrentLocation()
 //                checkBiometricSupport()
 //                val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(activity)
 //                    .setTitle("Presensi dulu")
@@ -314,7 +318,7 @@ class CheckFragment : Fragment(), CheckContract.View {
 //                    authenticationCallback
 //                )
 
-                postData()
+
             }
         } else if (message == "Belum Absen") {
 //            binding.tvResult.text = message
@@ -326,10 +330,11 @@ class CheckFragment : Fragment(), CheckContract.View {
 
 
             binding.btnCheckIn.setOnClickListener {
-//                fusedLocationClient =
-//                    LocationServices.getFusedLocationProviderClient(requireActivity())
-//                getCurrentLocation()
+
                 absenStatus = "Absen Masuk"
+
+                getCurrentLocation()
+
 //                checkBiometricSupport()
 //                val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(activity)
 //                    .setTitle("Presensi dulu")
@@ -348,7 +353,7 @@ class CheckFragment : Fragment(), CheckContract.View {
 //                    authenticationCallback
 //                )
 
-                postData()
+
 
 
             }
@@ -385,7 +390,7 @@ class CheckFragment : Fragment(), CheckContract.View {
 
 
     @RequiresApi(Build.VERSION_CODES.P)
-    override fun onCheckSuccess(absensiResponse: AbsensiResponse, status : String) {
+    override fun onCheckSuccess(absensiResponse: AbsensiResponse, status: String) {
 //        view?.let { Navigation.findNavController(it).navigate(R.id.action_check_success) }
         showCustomDialog("Success", status)
 
@@ -427,13 +432,11 @@ class CheckFragment : Fragment(), CheckContract.View {
     }
 
     private fun statusKet() {
-        if (keterangan == "" || keterangan == "Hadir" ||  keterangan == "Lembur") {
+        if (keterangan == "" || keterangan == "Hadir" || keterangan == "Lembur") {
             binding.lnCheck.visibility = View.VISIBLE
             binding.lnFormAlasan.visibility = View.GONE
             binding.edtAlasan.setText("")
-        }
-
-        else {
+        } else {
             binding.lnCheck.visibility = View.GONE
             binding.lnFormAlasan.visibility = View.VISIBLE
             binding.edtAlasan.setText("")
@@ -459,7 +462,7 @@ class CheckFragment : Fragment(), CheckContract.View {
             bind.tvSuccess.text = "Gagal"
         }
         var color = ""
-        color = if(status == "Absen Masuk") "#00fc28" else "#f44336"
+        color = if (status == "Absen Masuk") "#00fc28" else "#f44336"
         bind.tvCheck.setTextColor(Color.parseColor(color))
         bind.tvCheck.text = status
         Handler().postDelayed({

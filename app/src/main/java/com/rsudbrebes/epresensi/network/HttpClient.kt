@@ -4,7 +4,6 @@ package com.rsudbrebes.epresensi.network
 
 
 import com.rsudbrebes.epresensi.BuildConfig
-import com.rsudbrebes.epresensi.BuildConfig.BASE_URL
 import com.rsudbrebes.epresensi.utils.Helpers
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
