@@ -12,7 +12,7 @@ import java.sql.Struct
 
 interface CheckContract {
     interface View: BaseView {
-        fun onLongDistance(message : String)
+        fun onLongDistance(maps: String,message : String)
         fun onShortDistance(maps: String, message : String)
         fun onCheckSuccess(absensiResponse: AbsensiResponse, status: String)
         fun onCheckFailed(message: String, status: String)

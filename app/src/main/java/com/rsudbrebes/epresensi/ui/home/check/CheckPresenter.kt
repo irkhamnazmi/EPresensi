@@ -28,7 +28,7 @@ class CheckPresenter (private val view: CheckContract.View) : CheckContract.Pres
         if(resultDistance <= 100 ){
             view.onShortDistance("${latitude.toString()},${longitude.toString()}","Sudah dekat ${resultDistance.toString()} meter")
         } else{
-            view.onLongDistance("Masih jauh ${resultDistance.toString()} meter")
+            view.onLongDistance("${latitude.toString()},${longitude.toString()}","Masih jauh ${resultDistance.toString()} meter")
         }
     }
 
