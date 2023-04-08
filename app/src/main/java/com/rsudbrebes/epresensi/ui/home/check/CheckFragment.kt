@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.KeyguardManager
+import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.DialogInterface
@@ -11,10 +12,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.hardware.biometrics.BiometricPrompt
-import android.os.Build
-import android.os.Bundle
-import android.os.CancellationSignal
-import android.os.Handler
+import android.os.*
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -51,13 +49,14 @@ class CheckFragment : Fragment(), CheckContract.View {
 
     private lateinit var binding: FragmentCheckBinding
     lateinit var presenter: CheckPresenter
-    private val LOCATION_PERMISSION_REQ_CODE = 1000;
+    private val LOCATION_PERMISSION_REQ_CODE = 1000
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var mHandler: Handler
     lateinit var tvUsername: TextView
     lateinit var tvJabatan: TextView
     lateinit var tvNip: TextView
+
 
     private var cancellationSignal: CancellationSignal? = null
     val user = EPresensi.getApp().getUser()
@@ -68,6 +67,7 @@ class CheckFragment : Fragment(), CheckContract.View {
     var shift: Int = 0
     var absenStatus = ""
     private lateinit var alertDialog: AlertDialog
+
 
 
     override fun onCreateView(
@@ -122,7 +122,6 @@ class CheckFragment : Fragment(), CheckContract.View {
         fusedLocationClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
         presenter.checkAbsen(userResponse.kode_pegawai)
-
         statusKet()
 
     }
@@ -161,7 +160,7 @@ class CheckFragment : Fragment(), CheckContract.View {
             ActivityCompat.requestPermissions(
                 requireActivity(),
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQ_CODE
-            );
+            )
 
             return
 
@@ -199,7 +198,7 @@ class CheckFragment : Fragment(), CheckContract.View {
         }
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
-                android.Manifest.permission.USE_BIOMETRIC
+                Manifest.permission.USE_BIOMETRIC
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             notifyUser("Fingerprint has not been enabled in settings.")
@@ -242,17 +241,19 @@ class CheckFragment : Fragment(), CheckContract.View {
             }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    override fun onLongDistance(message: String) {
+    override fun onLongDistance(maps: String, message: String) {
 //        binding.tvResult.text = message
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+//        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        location = maps
 
+        postData()
 
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onShortDistance(maps: String, message: String) {
 //        binding.tvResult.text = message
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+//        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         location = maps
 
         postData()
@@ -298,8 +299,20 @@ class CheckFragment : Fragment(), CheckContract.View {
             binding.btnCheckOut.setTextColor(Color.parseColor("#FFFFFF"))
             binding.btnCheckOut.setOnClickListener {
 
-                absenStatus = "Absen Pulang"
-                getCurrentLocation()
+                var mProgressDialog =  ProgressDialog (context)
+                mProgressDialog.setMessage("Tunggu sebentar...")
+                mProgressDialog.setCancelable(false)
+                mProgressDialog.setCanceledOnTouchOutside(false)
+                mProgressDialog.setIndeterminate(true)
+                mProgressDialog.setProgressStyle(android.R.attr.progressBarStyleSmall)
+                mProgressDialog.show()
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    mProgressDialog.dismiss()
+                    absenStatus = "Absen Pulang"
+                    getCurrentLocation()
+                },1000)
+
 //                checkBiometricSupport()
 //                val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(activity)
 //                    .setTitle("Presensi dulu")
@@ -331,9 +344,19 @@ class CheckFragment : Fragment(), CheckContract.View {
 
             binding.btnCheckIn.setOnClickListener {
 
-                absenStatus = "Absen Masuk"
+                var mProgressDialog =  ProgressDialog (context)
+                mProgressDialog.setMessage("Tunggu sebentar...")
+                mProgressDialog.setCancelable(false)
+                mProgressDialog.setCanceledOnTouchOutside(false)
+                mProgressDialog.setIndeterminate(true)
+                mProgressDialog.setProgressStyle(android.R.attr.progressBarStyleSmall)
+                mProgressDialog.show()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    mProgressDialog.dismiss()
+                    absenStatus = "Absen Masuk"
+                    getCurrentLocation()
+                },1000)
 
-                getCurrentLocation()
 
 //                checkBiometricSupport()
 //                val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(activity)
@@ -470,16 +493,16 @@ class CheckFragment : Fragment(), CheckContract.View {
             initRefresh()
         }, 2000)
 
-        alertDialog = dialogBuilder.create();
+        alertDialog = dialogBuilder.create()
 //        alertDialog.window!!.getAttributes().windowAnimations = R.style.PauseDialogAnimation
-        alertDialog.window!!.getAttributes().windowAnimations =
+        alertDialog.window!!.attributes.windowAnimations =
             R.style.Animation_Design_BottomSheetDialog
 //        alertDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent);
         alertDialog.show()
     }
 
     private fun initRefresh() {
-        (activity as MainActivity)?.dispatchAction(1)
+        (activity as MainActivity).dispatchAction(1)
     }
 
 

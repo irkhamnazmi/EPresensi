@@ -10,7 +10,7 @@
     <string name="sebelum_mel">Sebelum melanjutkan absensi, lengkapi terlebih dahulu data anda.</string>
     <string name="sesudah_mel">Silahkan untuk melanjutkan sesi ini dan pastikan segera melakukan absen dengan tepat waktu.</string>
     <string name="jl_jendral_">Jl. Jendral Sudirman No.181, Brebes, Jawa Tengah 52272</string>
-    <string name="version">Versi 0.1.2</string>
+    <string name="version">Versi 1.10.0</string>
     <string-array name="ket_absen">
         <item name="">Ket.Absen</item>
         <item name="hadir">Hadir</item>
@@ -19,7 +19,6 @@
         <item name="cuti">Cuti</item>
         <item name="dinas_luar_kota">Dinas Luar Kota</item>
         <item name="bebas_tugas">Bebas Tugas</item>
-        <item name="lembur">Lembur</item>
     </string-array>
     <string-array name="shift_option">
         <item name="">Pilih Shift</item>
