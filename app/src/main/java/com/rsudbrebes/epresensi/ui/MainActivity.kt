@@ -1,41 +1,26 @@
 package com.rsudbrebes.epresensi.ui
 
 import android.Manifest
-import android.app.AlarmManager
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.ContentValues
-import android.content.ContentValues.TAG
-import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import androidx.work.*
-import com.rsudbrebes.epresensi.EPresensi
 import com.rsudbrebes.epresensi.R
 import com.rsudbrebes.epresensi.databinding.ActivityMainBinding
-import com.rsudbrebes.epresensi.utils.AlarmReceiver
 import com.rsudbrebes.epresensi.utils.WorkerService
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 import java.util.concurrent.TimeUnit
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var calendar: Calendar
-    private lateinit var alarmManager: AlarmManager
-    private lateinit var pendingIntent: PendingIntent
+
+
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -64,7 +49,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun workerService() {
+    @RequiresApi(Build.VERSION_CODES.M)
+     fun workerService() {
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.POST_NOTIFICATIONS
@@ -73,11 +59,18 @@ class MainActivity : AppCompatActivity() {
 
             return
         }
-        val  mRequest = OneTimeWorkRequestBuilder<WorkerService>()
+        val  mRequest = PeriodicWorkRequestBuilder<WorkerService>(15, TimeUnit.MINUTES)
+            .setConstraints(Constraints.Builder()
+                .setRequiresBatteryNotLow(false)
+                .setRequiredNetworkType(NetworkType.NOT_REQUIRED)
+                .setRequiresCharging(false)
+                .setRequiresDeviceIdle(false)
+            .build()
+            )
             .build()
 
         WorkManager.getInstance(this)
-            .enqueue(mRequest)
+            .enqueueUniquePeriodicWork("sendLogs", ExistingPeriodicWorkPolicy.REPLACE,mRequest)
         return
 //        EPresensi.getApp().setNotif("running")
 
